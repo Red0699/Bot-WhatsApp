@@ -2,6 +2,8 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const fs = require('fs');
 const path = require('path');
+const connectDB = require('./config/db');
+//connectDB();
 
 const client = new Client({
   authStrategy: new LocalAuth()
