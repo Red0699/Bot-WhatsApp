@@ -1,0 +1,11 @@
+2025/06/27-13:55:40.845 2d4c Reusing MANIFEST D:\familia\Desktop\ChatBot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/06/27-13:55:40.846 2d4c Recovering log #171
+2025/06/27-13:55:40.880 2d4c Reusing old log D:\familia\Desktop\ChatBot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000171.log 
+2025/06/27-13:55:43.392 1ef0 Level-0 table #176: started
+2025/06/27-13:55:43.399 1ef0 Level-0 table #176: 222552 bytes OK
+2025/06/27-13:55:43.400 1ef0 Delete type=0 #171
+2025/06/27-13:55:43.400 1ef0 Manual compaction at level-0 from '\x00E\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00F\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/06/27-13:55:45.659 2d4c Compacting 1@1 + 1@2 files
+2025/06/27-13:55:45.755 2d4c Generated table #177@1: 30773 keys, 1254824 bytes
+2025/06/27-13:55:45.755 2d4c Compacted 1@1 + 1@2 files => 1254824 bytes
+2025/06/27-13:55:45.755 2d4c compacted to: files[ 0 0 1 0 0 0 0 ]
