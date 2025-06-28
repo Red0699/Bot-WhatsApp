@@ -1,6 +1,7 @@
 module.exports = {
   name: '!grupo',
   description: 'Muestra el nombre y la cantidad de miembros del grupo.',
+  category: 'Utilidades',
   async execute(client, message) {
     const chat = await message.getChat();
     if (chat.isGroup) {

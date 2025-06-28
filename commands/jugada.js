@@ -3,6 +3,7 @@ const { submitMove, getMatchByPlayer, deleteMatch } = require('../utils/pptMatch
 module.exports = {
   name: '!jugada',
   description: 'Envía tu jugada en privado al bot',
+  category: 'Comandos para jugar',
   async execute(client, message) {
     // Solo se permite por privado
     const chat = await message.getChat();

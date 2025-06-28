@@ -3,6 +3,7 @@ const { startMatch, getMatch } = require('../utils/pptMatches');
 module.exports = {
   name: '!ppt',
   description: 'Reta a otro usuario a jugar Piedra, Papel o Tijera. Ej: !ppt @usuario',
+  category: 'Juegos',
   async execute(client, message) {
     const chat = await message.getChat();
     if (!chat.isGroup) return message.reply('❌ Solo puedes usar esto en un grupo');

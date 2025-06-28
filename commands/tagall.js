@@ -1,6 +1,7 @@
 module.exports = {
   name: '!todos',
   description: 'Menciona a todos los miembros del grupo.',
+  category: 'Utilidades',
   async execute(client, message) {
     const chat = await message.getChat();
 

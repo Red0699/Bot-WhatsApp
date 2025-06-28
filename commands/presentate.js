@@ -1,6 +1,7 @@
 module.exports = {
   name: '!presentate',
   description: 'Sword Bot se presenta con estilo en el grupo.',
+  category: 'Interacción',
   async execute(client, message) {
     const chat = await message.getChat();
     const isGroup = chat.isGroup;
