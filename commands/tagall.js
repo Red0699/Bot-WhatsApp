@@ -16,8 +16,10 @@ module.exports = {
 
     for (const participant of chat.participants) {
       const contact = await client.getContactById(participant.id._serialized);
+      console.log(contact);
       mentions.push(contact);
       text += `@${contact.number} `;
+      //console.log(`@${contact.number} `);
     }
 
     await chat.sendMessage(text.trim(), { mentions });

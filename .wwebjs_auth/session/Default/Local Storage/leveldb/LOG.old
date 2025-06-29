@@ -1,6 +1,3 @@
-2025/06/27-16:05:38.322 1594 Reusing MANIFEST D:\familia\Desktop\ChatBot\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2025/06/27-16:05:38.323 1594 Recovering log #8
-2025/06/27-16:05:38.323 1594 Reusing old log D:\familia\Desktop\ChatBot\.wwebjs_auth\session\Default\Local Storage\leveldb/000008.log 
-2025/06/27-16:17:19.184 3124 Level-0 table #11: started
-2025/06/27-16:17:19.193 3124 Level-0 table #11: 14515 bytes OK
-2025/06/27-16:17:19.196 3124 Delete type=0 #8
+2025/06/28-18:04:59.406 b04 Reusing MANIFEST D:\familia\Desktop\ChatBot\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
+2025/06/28-18:04:59.407 b04 Recovering log #7
+2025/06/28-18:04:59.407 b04 Reusing old log D:\familia\Desktop\ChatBot\.wwebjs_auth\session\Default\Local Storage\leveldb/000007.log 
