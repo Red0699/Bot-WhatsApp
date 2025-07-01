@@ -1,2 +1,3 @@
-2025/06/28-14:00:16.309 29e4 Creating DB D:\familia\Desktop\ChatBot\.wwebjs_auth\session\Default\shared_proto_db since it was missing.
-2025/06/28-14:00:16.319 29e4 Reusing MANIFEST D:\familia\Desktop\ChatBot\.wwebjs_auth\session\Default\shared_proto_db/MANIFEST-000001
+2025/06/30-19:05:48.330 2090 Reusing MANIFEST D:\familia\Desktop\ChatBot\.wwebjs_auth\session\Default\shared_proto_db/MANIFEST-000001
+2025/06/30-19:05:48.330 2090 Recovering log #3
+2025/06/30-19:05:48.331 2090 Reusing old log D:\familia\Desktop\ChatBot\.wwebjs_auth\session\Default\shared_proto_db/000003.log 

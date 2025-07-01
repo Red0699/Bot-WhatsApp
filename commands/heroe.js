@@ -22,14 +22,14 @@ module.exports = {
     const chat = await message.getChat();
     const chatId = chat.id._serialized;
 
-    const topJugador = heroe.topJugador;
-    const topJugadorTexto = topJugador
-      ? `👤 Más usado por: @${topJugador} `
+    const topJugadores = Array.isArray(heroe.topJugador) ? heroe.topJugador : [];
+    const menciones = topJugadores.map(num => `${num}@c.us`);
+
+    const topJugadorTexto = topJugadores.length
+      ? `👤 Más usado por:\n- ${topJugadores.map(num => `@${num}`).join('\n- ')}`
       : '👤 Más usado por: *Nadie aún*';
 
-    console.log(`@${topJugador} `);
-
-    const caption = 
+    const caption =
       `🧱 *${heroe.nombre}*\n` +
       `⚔️ Rol: ${heroe.roles.join(', ')}\n` +
       `🧭 Líneas jugadas: ${heroe.linea.join(', ')}\n` +
@@ -41,7 +41,7 @@ module.exports = {
 
       await client.sendMessage(chatId, media, {
         caption,
-        mentions: topJugador ? [{ id: { _serialized: topJugador } }] : []
+        mentions: menciones
       });
     } catch (error) {
       console.error('❌ Error al enviar imagen:', error.message);

@@ -24,15 +24,14 @@ module.exports = {
 
     startMatch(chat.id._serialized, player1, player2);
 
-    const player1Name = player1.split('@')[0];
-    const player2Name = player2.split('@')[0];
-
     const msg =
       `🎮 *Partida iniciada de Piedra, Papel o Tijera:*\n` +
-      `👤 ${player1Name} vs ${player2Name}\n\n` +
+      `👤 @${player1.split('@')[0]} vs @${player2.split('@')[0]}\n\n` +
       `👉 Ambos deben enviar su jugada con:\n` +
-      `*¡jugada piedra | papel | tijera*`;
+      `*(!jugada piedra | papel | tijera)*`;
 
-    await message.reply(msg); // 👈 sin `mentions`
+    await chat.sendMessage(msg, {
+      mentions: [player1, player2].map(id => `${id.replace(/@c\.us$/, '')}@c.us`)
+    });
   }
 };
