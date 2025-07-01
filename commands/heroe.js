@@ -30,7 +30,7 @@ module.exports = {
       : '👤 Más usado por: *Nadie aún*';
 
     const caption =
-      `🧱 *${heroe.nombre}*\n` +
+      `🟢 *${heroe.nombre}*\n` +
       `⚔️ Rol: ${heroe.roles.join(', ')}\n` +
       `🧭 Líneas jugadas: ${heroe.linea.join(', ')}\n` +
       `🛡 Build recomendada:\n- ${heroe.build.join('\n- ')}\n\n` +
