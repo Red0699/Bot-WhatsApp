@@ -899,7 +899,7 @@ module.exports = [
         imagen: 'https://rare-gallery.com/thumbs/347457-Popol-and-Kupa-Mobile-Legends-Bang-Bang-MLBB-ML-Video-Game.jpg',
         roles: ['Tirador'],
         linea: ['Jungle', 'Gold Lane'],
-        build: ['Botas Duras', '', 'Filo Desesperante', 'Arma Málefica', 'Furia del Berseker', 'Viento de la Naturaleza'],
+        build: ['Botas Duras', 'Alabarda del Mar', 'Filo Desesperante', 'Arma Málefica', 'Furia del Berseker', 'Viento de la Naturaleza'],
         topJugador: ['573214663210']
     },
     {
