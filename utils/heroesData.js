@@ -13,9 +13,9 @@ module.exports = [
         nombre: 'Chou',
         imagen: 'https://wallpaperaccess.com/full/2281683.png',
         roles: ['Combatiente', 'Tanque'],
-        linea: ['EXP Lane'],
+        linea: ['EXP Lane', 'Roam'],
         build: ['Botas de guerrero', 'Espada de los 7 mares', 'Golpe del cazador', 'Batalla sin fin', 'Filo desesperante', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573042563241']
     }
     ,
     {
@@ -24,7 +24,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Ligeras', 'Hablador del Viento', 'Garras de Haas', 'Arma Maléfica', 'Furia del Berserker', 'Alabarda del Mar'],
-        topJugador: null
+        topJugador: ['573103839259','573218301741','573144157088','573135644396','573043311464', '573232327405']
     },
     {
         nombre: 'Aldous',
@@ -32,7 +32,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane'],
         build: ['Botas de asesino', 'Espada del cazador', 'Golpe del cazador', 'Filo de la noche', 'Cachiporra del relampago', 'Alas sangrientas'],
-        topJugador: null
+        topJugador: ['573228703867']
     },
     {
         nombre: 'Miya',
@@ -40,7 +40,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Ligeras', 'Hablador del Viento', 'Garras de Haas', 'Furia del Berserker', 'Cazador de demonios', 'Arma Maléfica'],
-        topJugador: null
+        topJugador: ['573006367556', '573218301741', '573232327405','573103839259','573005796860','573233585346']
     },
     {
         nombre: 'Zetian',
@@ -56,7 +56,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Demoníacas', 'Varita Brillante', 'Farol de los deseos', 'Guja Divina', 'Alas Sangrientas', 'Cristal Sagrado'],
-        topJugador: null
+        topJugador: ['573214663210','573232327405']
     },
     {
         nombre: 'Cecilion',
@@ -64,7 +64,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Demoníacas', 'Reloj del destino', 'Varita Brillante', 'Farol de los deseos', 'Guja Divina', 'Alas Sangrientas'],
-        topJugador: null
+        topJugador: ['573214663210','573103839259','573042087817']
     },
     {
         nombre: 'Xavier',
@@ -72,7 +72,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Mágicas', 'Talismán Encantado', 'Varita Brillante', 'Farol de los deseos', 'Guja Divina', 'Cristal Sagrado'],
-        topJugador: null
+        topJugador: ['573218301741','573232327405','573214663210']
     },
     {
         nombre: 'Nana',
@@ -80,7 +80,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Reloj del destino', 'Cachiporra del relampago', 'Varita Brillante', 'Varita del Genio', 'Cristal Sagrado'],
-        topJugador: null
+        topJugador: ['573218301741','573137428611','573006367556', '573135644396','573214663210']
     },
     {
         nombre: 'Kadita',
@@ -88,7 +88,7 @@ module.exports = [
         roles: ['Mago', 'Asesino'],
         linea: ['Mid Lane', 'Recorrer'],
         build: ['Botas Arcanas', 'Cachiporra del relampago', 'Varita del Genio','Varita Brillante' ,'Cristal Sagrado', 'Guja Divina'],
-        topJugador: null
+        topJugador: ['573214663210']
     },
     {
         nombre: 'Zhask',
@@ -96,7 +96,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Demoníacas', 'Varita Brillante', 'Varita del Genio', 'Guja Divina', 'Farol de los deseos', 'Cristal Sagrado'],
-        topJugador: null
+        topJugador: ['573144157088','573197959922','573214663210']
     },
     {
         nombre: 'Lunox',
@@ -104,7 +104,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Varita Brillante', 'Varita del Genio', 'Cristal Sagrado', 'Farol de los deseos', 'Guja Divina'],
-        topJugador: null
+        topJugador: ['573214663210']
     },
     {
         nombre: 'Vale',
@@ -112,7 +112,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Varita del Genio', 'Varita Brillante', 'Cachiporra del Relámpago', 'Farol de los deseos', 'Guja Divina'],
-        topJugador: null
+        topJugador: ['573218301741','573103839259','573135644396', '573233585346','573214663210']
     },
     {
         nombre: 'Valentina',
@@ -120,7 +120,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Duras', 'Talismán Encantado', 'Varita Brillante', 'Alas Sangrientas', 'Cristal Sagrado', 'Guja Divina'],
-        topJugador: null
+        topJugador: ['573214663210']
     },
     {
         nombre: 'Vexana',
@@ -128,7 +128,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Talismán Encantado', 'Varita Brillante', 'Alas Sangrientas', 'Farol de los deseos', 'Guja Divina'],
-        topJugador: null
+        topJugador: ['573218301741','573197959922', '573005796860', '573232327405','573214663210']
     },
     {
         nombre: 'Esmeralda',
@@ -136,7 +136,7 @@ module.exports = [
         roles: ['Mago', 'Tanque'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Duras', 'Talismán Encantado', 'Guadaña de Starlium', 'Dominio del Hielo', 'Oráculo', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573218301741','573103839259','573214663210']
     },
     {
         nombre: 'Gord',
@@ -144,7 +144,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Talismán Encantado', 'Varita Brillante', 'Farol de los deseos', 'Guja Divina', 'Cristal Sagrado'],
-        topJugador: null
+        topJugador: ['573144157088']
     },
     {
         nombre: 'Faramis',
@@ -152,7 +152,7 @@ module.exports = [
         roles: ['Mago', 'Soporte'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Talismán Encantado', 'Varita Brillante', 'Cachiporra del Relámpago', 'Guja Divina', 'Alas Sangrientas'],
-        topJugador: null
+        topJugador: ['573042563241','573214663210']
     },
     {
         nombre: 'Eudora',
@@ -160,15 +160,15 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Varita del Genio', 'Cachiporra del Relámpago', 'Varita Brillante', 'Guja Divina', 'Cristal Sagrado'],
-        topJugador: null
+        topJugador: ['573232327405','573144157088','573103839259','573214663210']
     },
     {
         nombre: 'Lylia',
-        imagen: 'https://rare-gallery.com/resol/1920x1080/342674-Lylia-Star-Student-Skin-Mobile-Legends-Bang-Bang-ML-MLBB-Video-Game.jpg',
+        imagen: 'https://cdn-2.tstatic.net/jambi/foto/bank/images/Hero-Lylia.jpg',
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Mágicas', 'Talismán Encantado', 'Varita Brillante', 'Farol de los deseos', 'Guja Divina', 'Alas Sangrientas'],
-        topJugador: null
+        topJugador: ['573006367556', '573232327405','573137428611']
     },
     {
         nombre: 'Odette',
@@ -176,7 +176,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Demoníacas', 'Varita del Genio', 'Varita Brillante', 'Cristal Sagrado', 'Guja Divina', 'Alas Sangrientas'],
-        topJugador: null
+        topJugador: ['573197959922','573218301741','573137428611', '573232327405','573214663210']
     },
     {
         nombre: "Chang'e",
@@ -184,7 +184,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Varita Brillante', 'Varita del Genio', 'Cristal Sagrado', 'Farol de los deseos', 'Guja Divina'],
-        topJugador: null
+        topJugador: ['34658996645','573006367556','573214663210']
     },
     {
         nombre: 'Valir',
@@ -192,7 +192,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane', 'Roam'],
         build: ['Botas Demoníacas', 'Varita de la Reina de Hielo', 'Varita Brillante', 'Farol de los deseos', 'Guja Divina', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['34658996645','573144157088','573144157088', '573232327405','573214663210']
     },
     {
         nombre: 'Zhuxin',
@@ -200,7 +200,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Duras', 'Reloj del Destino', 'Portador del Cielo', 'Varilla Brillante', 'Farol de los deseos', 'Guja Divina'],
-        topJugador: null
+        topJugador: ['573144157088','573214663210']
     },
     {
         nombre: 'Aurora',
@@ -208,7 +208,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Varita Brillante', 'Faro de los deseos', 'Alas Sangrientas', 'Guja Divina', 'Cristal Sagrado'],
-        topJugador: null
+        topJugador: ['573233585346', '573218301741','573214663210']
     },
     {
         nombre: 'Luo Yi',
@@ -216,7 +216,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Talismán Encantado', 'Varita Brillante', 'Guja Divina', 'Farol de los deseos', 'Cristal Sagrado'],
-        topJugador: null
+        topJugador: ['573137428611','573214663210']
     },
     {
         nombre: 'Novaria',
@@ -224,7 +224,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Talismán Encantado', 'Varita Brillante', 'Guja Divina', 'Farol de los deseos', 'Cristal Sagrado'],
-        topJugador: null
+        topJugador: ['573233585346','573214663210']
     },
     {
         nombre: 'Harley',
@@ -232,7 +232,7 @@ module.exports = [
         roles: ['Mago', 'Asesino'],
         linea: ['Jungle'],
         build: ['Botas Arcanas', 'Varita del Genio', 'Varita Brillante', 'Alas Sangrientas', 'Guja Divina', 'Cristal Sagrado'],
-        topJugador: null
+        topJugador: ['573214663210']
     },
     {
         nombre: 'Kimmy',
@@ -240,7 +240,7 @@ module.exports = [
         roles: ['Mago', 'Tirador'],
         linea: ['Gold Lane', 'Mid Lane'],
         build: ['Botas Arcanas', 'Pluma del Cielo', 'Energía Concentrada', 'Cristal Sagrado', 'Alas Sangrientas', 'Guja Divina'],
-        topJugador: null
+        topJugador: ['573137428611','573214663210']
     },
     {
         nombre: 'Kagura',
@@ -248,7 +248,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane'],
         build: ['Botas Arcanas', 'Varita de Genio', 'Cachiporra del Relámpago', 'Varita Brillante', 'Guja Divina', 'Cristal Sagrado'],
-        topJugador: null
+        topJugador: ['573233585346','573137428611']
     },
     {
         nombre: 'Harith',
@@ -256,7 +256,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Gold Lane'],
         build: ['Botas Mágicas', 'Guadaña de Starlium', 'Pluma del Cielo', 'Cristal Sagrado', 'Guja Divina', 'Alas Sangrientas'],
-        topJugador: null
+        topJugador: ['573218301741','34658996645','573103839259']
     },
     {
         nombre: 'Alice',
@@ -272,7 +272,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane', 'Jungle'],
         build: ['Botas Mágicas', 'Talismán Encantado', 'Energía Concentrada', 'Varita Brillante', 'Farol de los deseos', 'Guja Divina'],
-        topJugador: null
+        topJugador: ['573197959922','573103839259','573218301741']
     },
     {
         nombre: 'Selena',
@@ -280,7 +280,7 @@ module.exports = [
         roles: ['Mago', 'Asesino'],
         linea: ['Mid Lane', 'Jungle', 'Roam'],
         build: ['Botas Mágicas', 'Talismán Encantado', 'Guadaña de Starlium', 'Varita Brillante', 'Cristal Sagrado', 'Guja Divina'],
-        topJugador: null
+        topJugador: ['573042563241']
     },
     {
         nombre: 'Bane',
@@ -297,7 +297,7 @@ module.exports = [
         roles: ['Tanque','Combatiente'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Duras', 'Hacha de guerra', 'Cinturón de Trueno', 'Dominio de Hielo', 'Oráculo', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573214663210']
     },
     {
         nombre: 'Julian',
@@ -305,7 +305,7 @@ module.exports = [
         roles: ['Asesino','Combatiente'],
         linea: ['Jungle', 'EXP Lane'],
         build: ['Botas Arcanas', 'Pluma del Cielo', 'Energía Concentrada', 'Cristal Sagrado', 'Guja Divina', 'Meteoro de Oro Rosa'],
-        topJugador: null
+        topJugador: ['573232327405','573214663210']
     },
     {
         nombre: 'Dyrroth',
@@ -313,7 +313,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Duras', 'Hacha de guerra', 'Alas de la Reina', 'Meteoro de Oro Rosa', 'Dominio de Hielo', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573103839259','573156660833','573042087817','573042563241','584120489349','573214663210']
     },
     {
         nombre: 'Yu Zhong',
@@ -321,7 +321,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane'],
         build: ['Botas Duras', 'Hacha de guerra', 'Alas de la Reina', 'Golpe de Cazador', 'Dominio de Hielo', 'Oráculo'],
-        topJugador: null
+        topJugador: ['573156660833','573228703867']
     },
     {
         nombre: 'Ruby',
@@ -329,7 +329,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Roam'],
         build: ['Botas Mágicas', 'Hacha de guerra', 'Alas de la Reina', 'Coraza de Fuerza Bruta', 'Dominio de Hielo', 'Oráculo'],
-        topJugador: null
+        topJugador: ['573218301741','573137428611','34658996645','573042087817', '573006367556', '573229417691','573214663210']
     },
     {
         nombre: 'Suyou',
@@ -337,7 +337,7 @@ module.exports = [
         roles: ['Asesino', 'Combatiente'],
         linea: ['Jungle', 'EXP Lane'],
         build: ['Botas Duras', 'Golpe de Cazador', 'Hacha de Guerra', 'Rugido Maléfico', 'Alas de la Reina', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['34658996645','573214663210']
     },
     {
         nombre: 'Balmond',
@@ -345,7 +345,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['Jungle', 'EXP Lane'],
         build: ['Botas Duras', 'Hacha de guerra', 'Alas de la Reina', 'Coraza de Fuerza Bruta', 'Dominio de Hielo', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573042087817','573042563241','573103839259', '573013219757']
     },
     {
         nombre:'Terizla',
@@ -353,7 +353,7 @@ module.exports = [
         roles: ['Combatiente', 'Tanque'],
         linea: ['EXP Lane'],
         build: ['Botas Duras', 'Hacha de guerra', 'Dominio de Hielo', 'Alas de la Reina', 'Escudo de Atenea', 'Coraza Antigua'],
-        topJugador: null
+        topJugador: ['34658996645']
     },
     {
         nombre: 'Alpha',
@@ -361,7 +361,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['Jungle', 'EXP Lane'],
         build: ['Botas Duras', 'Hacha de guerra', 'Coraza de Fuerza Bruta', 'Alabarda de Mar', 'Oráculo', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573103839259','573218301741','573137428611','573232327405','573214663210']
     },
     {
         nombre: 'Roger',
@@ -369,7 +369,7 @@ module.exports = [
         roles: ['Combatiente', 'Tirador'],
         linea: ['Jungle', 'Gold Lane', 'EXP Lane'],
         build: ['Botas Duras', 'Hablador del Viento', 'Hacha de Guerra', 'Batalla Sin Fin', 'Alabarda de Mar', 'Meteoro de Oro Rosa'],
-        topJugador: null
+        topJugador: ['573156660833','573103839259','573214663210']
     },
     {
         nombre: 'Cici',
@@ -377,7 +377,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane'],
         build: ['Botas Duras', 'Hacha de guerra', 'Coraza de Fuerza Bruta', 'Oráculo', 'Dominio de Hielo', 'Rugido Maléfico'],
-        topJugador: null
+        topJugador: ['573135644396','573144157088','573042087817','573214663210']
     },
     {
         nombre: 'Paquito',
@@ -385,7 +385,7 @@ module.exports = [
         roles: ['Combatiente', 'Asesino'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Duras', 'Golpe de Cazador', 'Hacha de Guerra', 'Rugido Maléfico', 'Oráculo', 'Meteoro de Oro Rosa'],
-        topJugador: null
+        topJugador: ['573229417691','573214663210']
     },
     {
         nombre: 'Guinevere',
@@ -393,7 +393,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Mágicas', 'Energía Concentrada', 'Guadaña de Starlium', 'Cristal Sagrado', 'Guja Divina', 'Corona de Invierno'],
-        topJugador: null,
+        topJugador: ['573144157088', '573137428611','573042563241']
     },
     {
         nombre: 'Hilda',
@@ -401,7 +401,7 @@ module.exports = [
         roles: ['Combatiente', 'Tanque'],
         linea: ['EXP Lane', 'Roam'],
         build: ['Botas Duras', 'Cinturón de Trueno', 'Dominio de Hielo', 'Espada de los 7 Mares', 'Escudo de Atenea', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573144157088','573042087817']
     },
     {
         nombre: 'Gatotkaca',
@@ -409,7 +409,7 @@ module.exports = [
         roles: ['Tanque', 'Combatiente'],
         linea: ['EXP Lane', 'Roam'],
         build: ['Botas Duras', 'Cinturón de Trueno', 'Dominio de Hielo', 'Armadura Radiante', 'Coraza Antigua', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573042087817','584120489349','573214663210']
     },
     {
         nombre: 'Fredrinn',
@@ -417,7 +417,7 @@ module.exports = [
         roles: ['Combatiente', 'Tanque'],
         linea: ['Jungle', 'EXP Lane', 'Roam'],
         build: ['Botas Duras', 'Cinturón de Trueno', 'Oráculo', 'Alas de la Reina', 'Dominio de Hielo', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['584120489349']
     },
     {
         nombre: 'Martis',
@@ -425,7 +425,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['Jungle','EXP Lane'],
         build: ['Botas Duras', 'Perforador de Cielo', 'Alabarda de Mar', 'Meteoro de Oro Rosa', 'Coraza de Fuerza Bruta', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['584120489349']
     },
     {
         nombre: 'Jawhead',
@@ -433,7 +433,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Roam', 'Jungle'],
         build: ['Botas Duras', 'Espada de los 7 Mares', 'Golpe de Cazador', 'Dominio de Hielo', 'Rugido Maléfico', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573013219757']
     },
     {
         nombre: 'X.Borg',
@@ -441,7 +441,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas de Guerrero', 'Hacha de Guerra', 'Varita de la Reina de Hielo', 'Inmortalidad', 'Oráculo', 'Coraza de Fuerza Bruta'],
-        topJugador: null
+        topJugador: ['573042087817','573229417691','573144157088']
     },
     {
         nombre: 'Khaleed',
@@ -449,7 +449,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Roam'],
         build: ['Botas Duras', 'Cinturón de Trueno', 'Dominio de Hielo', 'Armadura Radiante', 'Coraza de Fuerza Bruta', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573042087817','573042563241','34658996645','573214663210']
     },
     {
         nombre: 'Kaja',
@@ -465,7 +465,7 @@ module.exports = [
         roles: ['Combatiente', 'Asesino'],
         linea: ['Jungle', 'EXP Lane'],
         build: ['Botas Duras', 'Alabarda de Mar', 'Filo Desesperante', 'Batalla Sin Fin', 'Rugido Maléfico', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573013219757']
     },
     {
         nombre: 'Lukas',
@@ -473,7 +473,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Duras', 'Golpe de Cazador', 'Hacha de Guerra', 'Alabarda de Mar', 'Coraza de Fuerza Bruta', 'Escudo de Atenea'],
-        topJugador: null
+        topJugador: ['573156660833','573042087817','573043311464']
     },
     {
         nombre: 'Leomord',
@@ -489,7 +489,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane'],
         build: ['Botas Duras', 'Dominio de Hielo', 'Espada de los 7 Mares', 'Rugido Maléfico', 'Meteoro de Oro Rosa', 'Batalla Sin Fin'],
-        topJugador: null
+        topJugador: ['573229417691']
     },
     {
         nombre: 'Aulus',
@@ -505,7 +505,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Roam'],
         build: ['Botas Mágicas', 'Cinturón de Trueno', 'Oráculo', 'Dominio de Hielo', 'Coraza de Fuerza Bruta', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573042087817','573042563241']
     },
     {
         nombre: 'Silvanna',
@@ -513,7 +513,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Duras', 'Pluma de Cielo', 'Varita Brillante', 'Corona de Invierno', 'Guja Divina', 'Alas Sangrientas'],
-        topJugador: null
+        topJugador: ['573103839259']
     },
     {
         nombre: 'Freya',
@@ -521,7 +521,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Mágicas', 'Filo Desesperante', 'Alabarda de Mar', 'Batalla Sin Fin', 'Golpe de Cazador', 'Gran Lanza del Dragón'],
-        topJugador: null
+        topJugador: ['573156660833','573006367556','584120489349']
     },
     {
         nombre: 'Thamuz',
@@ -529,7 +529,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Duras', 'Guadaña de Corrosión', 'Hacha de Guerra', 'Oráculo', 'Dominio de Hielo', 'Alas de la Reina'],
-        topJugador: null
+        topJugador: ['573013219757']
     },
     {
         nombre: 'Phoveus',
@@ -553,7 +553,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Duras', 'Guadaña de Corrosión', 'Hablador del Viento', 'Alabarda de Mar', 'Cazador de Demonios', 'Gran Lanza del Dragón'],
-        topJugador: null
+        topJugador: ['573228703867','584120489349']
     },
     {
         nombre: 'Minsitthar',
@@ -561,7 +561,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane'],
         build: ['Botas Duras', 'Guadaña de Corrosión', 'Bastón Dorado', 'Alabarda de Mar', 'Cazador de Demonios', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573218301741']
     },
     {
         nombre: 'Alucard',
@@ -577,7 +577,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane'],
         build: ['Botas Ligeras', 'Hablador del Viento', 'Garras de Haas', 'Gran Lanza del Dragón', 'Alabarda de Mar', 'Rugido Maléfico'],
-        topJugador: null
+        topJugador: ['584120489349','573013219757']
     },
     {
         nombre: 'Kalea',
@@ -585,7 +585,7 @@ module.exports = [
         roles: ['Apoyo', 'Combatiente'],
         linea: ['Roam', 'EXP Lane'],
         build: ['Botas Duras', 'Cinturón de Trueno', 'Dominio de Hielo', 'Oráculo', 'Coraza Antigua', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573197959922']
     },
     {
         nombre: 'Lapu-Lapu',
@@ -593,23 +593,23 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['EXP Lane'],
         build: ['Botas Duras', 'Golpe de Cazador', 'Hacha de Guerra', 'Dominio de Hielo', 'Alas de la Reina', 'Oráculo', ],
-        topJugador: null
+        topJugador: ['573042087817']
     },
     {
         nombre: 'Argus',
-        imagen: 'https://rare-gallery.com/resol/1366x768/343455-Argus-Light-of-Dawn-Skin-Mobile-Legends-Bang-Bang-ML-MLBB-Video-Game.jpg',
+        imagen: 'https://wallpapercave.com/wp/wp8126773.jpg',
         roles: ['Combatiente'],
         linea: ['EXP Lane'],
         build: ['Botas Ligeras', 'Guadaña de Corrosión', 'Hablador del Viento', 'Garras de Haas', 'Alabarda de Mar', 'Furia del Berserker'],
-        topJugador: null
+        topJugador: ['573156660833','584120489349']
     },
     {
         nombre: 'Masha',
-        imagen: 'https://wallpapercave.com/wp/wp9022602.jpg',
+        imagen: 'https://wallpapercave.com/wp/wp4918081.jpg',
         roles: ['Combatiente', 'Tanque'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Ligeras', 'Alabarda de Mar', 'Espada de los 7 Mares', 'Rugido Maléfico', 'Filo Desesperante', 'Golpe de Cazador'],
-        topJugador: null
+        topJugador: ['584120489349','573013219757']
     },
     {
         nombre: 'Benedetta',
@@ -617,7 +617,7 @@ module.exports = [
         roles: ['Asesino', 'Combatiente'],
         linea: ['EXP Lane', 'Jungle'],
         build: ['Botas Duras', 'Espada de los 7 Mares', 'Golpe de Cazador', 'Rugido Maléfico', 'Alabarda de Mar', 'Filo Desesperante'],
-        topJugador: null
+        topJugador: ['34658996645']
     },
     {
         nombre: 'Arlott',
@@ -625,7 +625,7 @@ module.exports = [
         roles: ['Combatiente', 'Asesino'],
         linea: ['EXP Lane'],
         build: ['Botas Duras', 'Alabarda de Mar', 'Rugido Maléfico', 'Hacha de Guerra', 'Meteoro de Oro Rosa', 'Filo Desesperante'],
-        topJugador: null
+        topJugador: ['584120489349','34658996645']
     },
     //----------------------------------------------Rol Asesino-------------------------------------------------------
     {
@@ -634,7 +634,7 @@ module.exports = [
         roles: ['Asesino', 'Tirador'],
         linea: ['Jungle', 'Gold Lane'],
         build: ['Botas Duras', 'Golpe de Cazador', 'Hacha de Guerra', 'Batalla Sin Fin', 'Meteoro de Oro Rosa', 'Filo Desesperante'],
-        topJugador: null
+        topJugador: ['573214663210']
     },
     {
         nombre: 'Nolan',
@@ -642,7 +642,7 @@ module.exports = [
         roles: ['Asesino'],
         linea: ['Jungle'],
         build: ['Botas Duras', 'Espada de los 7 Mares', 'Golpe del Cazador', 'Rugido Maléfico', 'Filo Desesperante', 'Alabarda de Mar'],
-        topJugador: null
+        topJugador: ['34658996645','573214663210']
     },
     {
         nombre: 'Hanzo',
@@ -650,7 +650,7 @@ module.exports = [
         roles: ['Asesino'],
         linea: ['Jungle'],
         build: ['Botas Mágicas', 'Guadaña de Corrosión', 'Bastón Dorado', 'Cazador de Demonios', 'Rugido Maléfico', 'Alabarda de Mar'],
-        topJugador: null
+        topJugador: ['584120489349','573214663210']
     },
     {
         nombre: 'Aamon',
@@ -666,7 +666,7 @@ module.exports = [
         roles: ['Asesino'],
         linea: ['Jungle', 'Roam'],
         build: ['Botas Rápidas', 'Guadaña de Corrosión', 'Espada de los 7 Mares', 'Cazador de Demonios', 'Rugido Maléfico', 'Filo Desesperante'],
-        topJugador: null
+        topJugador: ['573144157088']
     },
     {
         nombre: 'Saber',
@@ -674,7 +674,7 @@ module.exports = [
         roles: ['Asesino'],
         linea: ['Jungle', 'Roam'],
         build: ['Botas Mágicas', 'Golpe de Cazador', 'Espada de los 7 Mares', 'Rugido Maléfico', 'Batalla Sin Fin', 'Filo Desesperante'],
-        topJugador: null
+        topJugador: ['573137428611','573042087817']
     },
     {
         nombre: 'Joy',
@@ -686,11 +686,11 @@ module.exports = [
     },
     {
         nombre: 'Lesley',
-        imagen: 'https://rare-gallery.com/resol/2048x1152/342682-Lesley-Lethal-Lady-Skin-Mobile-Legends-Bang-Bang-ML-MLBB-Video-Game.jpg',
+        imagen: 'https://liquipedia.net/commons/images/thumb/8/83/Lesley_Lethal_Lady_Skin.jpg/713px-Lesley_Lethal_Lady_Skin.jpg',
         roles: ['Tirador', 'Asesino'],
         linea: ['Gold Lane'],
         build: ['Botas de Guerrero', 'Furia del Berserker', 'Perforador de Cielo', 'Arma Málefica', 'Filo Desesperante', 'Batalla Sin Fin'],
-        topJugador: null
+        topJugador: ['573218301741','573137428611','573232327405']
     },
     {
         nombre: 'Mathilda',
@@ -698,7 +698,7 @@ module.exports = [
         roles: ['Apoyo', 'Asesino'],
         linea: ['Roam'],
         build: ['Botas Duras', 'Frasco del Oasis', 'Talismán Encantado', 'Dominio de Hielo', 'Oráculo', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573042563241']
     },
     {
         nombre: 'Karina',
@@ -706,7 +706,7 @@ module.exports = [
         roles: ['Asesino'],
         linea: ['Jungle'],
         build: ['Botas Arcanas', 'Guadaña de Starlium', 'Varita de Genio', 'Cristal Sagrado', 'Guja Divina', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573103839259','573144157088','573137428611']
     },
     {
         nombre: 'Hayabusa',
@@ -714,7 +714,7 @@ module.exports = [
         roles: ['Asesino'],
         linea: ['Jungle'],
         build: ['Botas Mágicas', 'Golpe de Cazador', 'Hacha de Guerra', 'Rugido Maléfico', 'Filo Desesperante', 'Batalla Sin Fin'],
-        topJugador: null
+        topJugador: ['573229417691']
     },
     {
         nombre: 'Natalia',
@@ -722,7 +722,7 @@ module.exports = [
         roles: ['Asesino'],
         linea: ['Roam', 'Jungle'],
         build: ['Botas Rápidas', 'Espada de los 7 Mares', 'Furia del Berserker', 'Alabarda de Mar', 'Rugido Maléfico', 'Filo Desesperante'],
-        topJugador: null
+        topJugador: ['573137428611','573144157088']
     },
     {
         nombre: 'Ling',
@@ -763,7 +763,7 @@ module.exports = [
         roles: ['Tanque', 'Apoyo'],
         linea: ['Roam'],
         build: ['Botas Duras', 'Frasco del Oasis', 'Dominio de Hielo', 'Oráculo', 'Escudo de Atenea', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573042563241','34658996645','573214663210']
     },
     {
         nombre: 'Belerick',
@@ -771,7 +771,7 @@ module.exports = [
         roles: ['Tanque'],
         linea: ['Roam'],
         build: ['Botas Duras', 'Dominio de Hielo', 'Escudo de Atenea', 'Armadura Afilada', 'Coraza Antigua', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573144157088','584120489349','573214663210']
     },
     {
         nombre: 'Akai',
@@ -779,7 +779,7 @@ module.exports = [
         roles: ['Tanque'],
         linea: ['Roam', 'Jungle', 'EXP Lane'],
         build: ['Botas Duras', 'Dominio de Hielo', 'Casco del Guardián', 'Coraza Antigua', 'Escudo de Atenea', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573042563241','573214663210']
     },
     {
         nombre: 'Edith',
@@ -787,7 +787,7 @@ module.exports = [
         roles: ['Tanque', 'Tirador'],
         linea: ['Roam', 'EXP Lane'],
         build: ['Botas Duras', 'Cinturón de Trueno', 'Dominio de Hielo',  'Armadura Radiante', 'Coraza de Fuerza Bruta', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573218301741','573144157088','34658996645']
     },
     {
         nombre: 'Tigreal',
@@ -795,7 +795,7 @@ module.exports = [
         roles: ['Tanque'],
         linea: ['Roam'],
         build: ['Botas Duras', 'Dominio de Hielo', 'Escudo de Atenea', 'Coraza Antigua', 'Casco del Guardián', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573042087817','573103839259','573137428611','573218301741','573013219757', '573042563241','573135644396','584120489349']
     },
     {
         nombre: 'Hylos',
@@ -803,7 +803,7 @@ module.exports = [
         roles: ['Tanque'],
         linea: ['Roam', 'EXP Lane'],
         build: ['Botas Duras', 'Cinturón de Trueno', 'Dominio de Hielo', 'Reloj del Destino', 'Armadura Radiante', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573197959922', '573042087817','573013219757','573103839259','573214663210']
     },
     {
         nombre: 'Carmilla',
@@ -811,7 +811,7 @@ module.exports = [
         roles: ['Apoyo', 'Tanque'],
         linea: ['Roam'],
         build: ['Botas Duras', 'Dominio de Hielo', 'Casco del Guardián', 'Coraza Antigua', 'Escudo de Atenea', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573232327405','573103839259','573042563241','573218301741','573214663210']
     },
     {
         nombre: 'Baxia',
@@ -819,7 +819,7 @@ module.exports = [
         roles: ['Tanque'],
         linea: ['Roam', 'Jungle', 'EXP Lane'],
         build: ['Botas Duras', 'Dominio de Hielo', 'Yelmo Maldito', 'Coraza Antigua', 'Armadura Radiante', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573228703867', '573042087817','573214663210']
     },
     {
         nombre: 'Lolita',
@@ -827,7 +827,7 @@ module.exports = [
         roles: ['Apoyo','Tanque'],
         linea: ['Roam'],
         build: ['Botas Duras', 'Dominio de Hielo', 'Frasco del Oasis', 'Inmortalidad', 'Escudo de Atenea', 'Coraza Antigua'],
-        topJugador: null
+        topJugador: ['573103839259','573042563241']
     },
     {
         nombre: 'Chip',
@@ -835,7 +835,7 @@ module.exports = [
         roles: ['Apoyo','Tanque'],
         linea: ['Roam'],
         build: ['Botas Duras', 'Tiempo Fugaz', 'Dominio de Hielo', 'Inmortalidad', 'Escudo de Atenea', 'Coraza Antigua'],
-        topJugador: null
+        topJugador: ['573218301741']
     },
     {
         nombre: 'Uranus',
@@ -843,7 +843,7 @@ module.exports = [
         roles: ['Tanque'],
         linea: ['EXP Lane'],
         build: ['Botas Duras', 'Cinturón de Trueno', 'Oráculo', 'Dominio de Hielo', 'Armadura Radiante', 'Coraza de Fuerza Bruta'],
-        topJugador: null
+        topJugador: ['573042087817','573042563241']
     },
     {
         nombre: 'Franco',
@@ -851,7 +851,7 @@ module.exports = [
         roles: ['Tanque'],
         linea: ['Roam'],
         build: ['Botas Rápidas', 'Dominio de Hielo', 'Tiempo Fugaz', 'Escudo de Atenea', 'Coraza Antigua', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573218301741','573042563241','573042087817','573233585346']
     },
     {
         nombre: 'Atlas',
@@ -859,7 +859,7 @@ module.exports = [
         roles: ['Tanque'],
         linea: ['Roam'],
         build: ['Botas Rápidas', 'Dominio de Hielo', 'Tiempo Fugaz', 'Escudo de Atenea', 'Coraza Antigua', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573103839259','573042563241','573013219757', '573218301741']
     },
     {
         nombre: 'Gloo',
@@ -867,7 +867,7 @@ module.exports = [
         roles: ['Tanque'],
         linea: ['EXP Lane', 'Roam'],
         build: ['Botas Duras', 'Yelmo Maldito', 'Varita Brillante', 'Coraza de Fuerza Bruta', 'Oráculo', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573229417691','573042087817']
     },
     {
         nombre: 'Khufra',
@@ -875,7 +875,7 @@ module.exports = [
         roles: ['Tanque'],
         linea: ['Roam', 'EXP Lane'],
         build: ['Botas Duras', 'Dominio de Hielo', 'Yelmo Maldito', 'Escudo de Atenea', 'Coraza Antigua', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573042563241','573229417691']
     },
     {
         nombre: 'Johnson',
@@ -883,7 +883,7 @@ module.exports = [
         roles: ['Tanque', 'Apoyo'],
         linea: ['Roam'],
         build: ['Botas Mágicas', 'Dominio de Hielo', 'Tiempo Fugaz', 'Escudo de Atenea', 'Coraza Antigua', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573228703867','573042563241']
     },
     //---------------------------------------------Rol Tirador-----------------------------------------------------
     {
@@ -892,7 +892,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Duras', 'Batalla Sin Fin', 'Filo Desesperante', 'Arma Málefica', 'Furia del Berseker', 'Viento de la Naturaleza'],
-        topJugador: null
+        topJugador: ['573228703867','573137428611','573013219757','573103839259','573218301741','573214663210']
     },
     {
         nombre: 'Popol y Kupa',
@@ -900,7 +900,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Jungle', 'Gold Lane'],
         build: ['Botas Duras', '', 'Filo Desesperante', 'Arma Málefica', 'Furia del Berseker', 'Viento de la Naturaleza'],
-        topJugador: null
+        topJugador: ['573214663210']
     },
     {
         nombre: 'Ixia',
@@ -908,7 +908,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Duras', 'Guadaña de Corrosión', 'Arma Málefica', 'Alabarda de Mar', 'Viento de la Naturaleza', 'Filo Desesperante'],
-        topJugador: null
+        topJugador: ['573218301741','573214663210']
     },
     {
         nombre: 'Irithel',
@@ -916,7 +916,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Duras', 'Hablador del Viento', 'Garras de Haas', 'Furia del Berserker', 'Arma Málefica', 'Gran Lanza del Dragón'],
-        topJugador: null
+        topJugador: ['573135644396','573103839259', '573006367556','573214663210']
     },
     {
         nombre: 'Karrie',
@@ -924,7 +924,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Duras', 'Guadaña de Corrosión', 'Bastón Dorado', 'Alabarda de Mar', 'Cazador de Demonios', 'Arma Maléfica'],
-        topJugador: null
+        topJugador: ['573103839259','573214663210']
     },
     {
         nombre: 'Brody',
@@ -932,7 +932,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Duras', 'Espada de los 7 Mares', 'Arma Maléfica', 'Meteoro de Oro Rosa', 'Alabarda de Mar', 'Viento de la Naturaleza'],
-        topJugador: null
+        topJugador: ['573103839259','573042087817']
     },
     {
         nombre: 'Granger',
@@ -940,7 +940,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Duras', 'Golpe de Cazador', 'Perforador del Cielo', 'Rugido Maléfico', 'Filo Desesperante', 'Meteoro de Oro Rosa'],
-        topJugador: null
+        topJugador: ['573103839259','573229417691','573218301741']
     },
     {
         nombre: 'Natan',
@@ -956,7 +956,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Duras', 'Guadaña de Corrosión', 'Cazador de Demonios', 'Bastón Dorado', 'Arma Maléfica', 'Meteoro de Oro Rosa'],
-        topJugador: null
+        topJugador: ['573137428611','573043311464','573006367556','573144157088']
     },
     {
         nombre: 'Beatrix',
@@ -964,7 +964,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Rápidas', 'Filo Desesperante', 'Arma Maléfica', 'Alabarda de Mar', 'Cazador de Demonios', 'Meteoro de Oro Rosa'],
-        topJugador: null
+        topJugador: ['573103839259','573228703867', '573042087817', '573006367556', '573137428611','573042563241','34658996645']
     },
     {
         nombre: 'Moskov',
@@ -972,7 +972,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas de Guerrero', 'Guadaña de Corrosión', 'Bastón Dorado', 'Cazador de Demonios', 'Arma Maléfica', 'Meteoro de Oro Rosa'],
-        topJugador: null
+        topJugador: ['573144157088', '573137428611']
     },
     {
         nombre: 'Claude',
@@ -980,7 +980,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Duras', 'Cazador de Demonios', 'Guadaña de Corrosión', 'Bastón Dorado', 'Rugido Maléfico', 'Viento de la Naturaleza'],
-        topJugador: null
+        topJugador: ['573042563241','573218301741']
     },
     {
         nombre: 'Melissa',
@@ -988,7 +988,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Duras', 'Guadaña de Corrosión','Cazador de Demonios',  'Bastón Dorado', 'Arma Maléfica', 'Albarda de Mar'],
-        topJugador: null
+        topJugador: ['573043311464','573137428611', '573218301741']
     },
     {
         nombre: 'Wanwan',
@@ -996,7 +996,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Guadaña de Corrosión', 'Hablador del Viento', 'Cazador de Demonios', 'Arma Maléfica', 'Garras de Haas', 'Viento de la Naturaleza' ],
-        topJugador: null
+        topJugador: ['573043311464','573103839259','573137428611']
     },
     {
         nombre: 'Bruno',
@@ -1004,7 +1004,7 @@ module.exports = [
         roles: ['Tirador'],
         linea: ['Gold Lane'],
         build: ['Botas Duras', 'Garra de Haas', 'Furia del Berserker', 'Arma Maléfica', 'Albarda de Mar', 'Hablador del Viento'],
-        topJugador: null
+        topJugador: ['573043311464','573103839259','573042087817']
     },
     //----------------------------------------------Rol Apoyo-----------------------------------------------------
     {
@@ -1013,7 +1013,7 @@ module.exports = [
         roles: ['Apoyo'],
         linea: ['Roam'],
         build: ['Botas Duras', 'Frasco del Oasis', 'Talismán Encantado', 'Dominio de Hielo', 'Escudo de Atenea', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573103839259']
     },
     {
         nombre: 'Estes',
@@ -1021,7 +1021,7 @@ module.exports = [
         roles: ['Apoyo'],
         linea: ['Roam'],
         build: ['Botas Demoníacas', 'Frasco del Oasis', 'Tiempo Fugaz' ,'Talismán Encantado', 'Dominio de Hielo', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573218301741','573103839259','573137428611','584120489349', '573233585346','573214663210']
     },
     {
         nombre: 'Angela',
@@ -1029,7 +1029,7 @@ module.exports = [
         roles: ['Apoyo'],
         linea: ['Roam'],
         build: ['Botas Demoníacas', 'Frasco del Oasis', 'Tiempo Fugaz' ,'Varita Brillante', 'Varita de la Reina de Hielo' , 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573233585346','573218301741', '573144157088','573197959922', '573042087817','573229417691']
     },
     {
         nombre: 'Diggie',
@@ -1037,7 +1037,7 @@ module.exports = [
         roles: ['Apoyo'],
         linea: ['Roam'],
         build: ['Botas Demoníacas', 'Frasco del Oasis', 'Tiempo Fugaz', 'Escudo de Atenea', 'Inmortalidad', 'Casco del Guardián'],
-        topJugador: null
+        topJugador: ['573232327405','573218301741']
     },
     {
         nombre: 'Floryn',
@@ -1045,6 +1045,6 @@ module.exports = [
         roles: ['Apoyo'],
         linea: ['Roam'],
         build: ['Botas Demoníacas', 'Frasco del Oasis', 'Tiempo Fugaz', 'Cristal Sagrado', 'Inmortalidad'],
-        topJugador: null
+        topJugador: ['573232327405','573233585346']
     }
 ];
