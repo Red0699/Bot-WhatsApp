@@ -192,7 +192,7 @@ module.exports = [
         roles: ['Mago'],
         linea: ['Mid Lane', 'Roam'],
         build: ['Botas Demoníacas', 'Varita de la Reina de Hielo', 'Varita Brillante', 'Farol de los deseos', 'Guja Divina', 'Inmortalidad'],
-        topJugador: ['34658996645','573144157088','573144157088', '573232327405','573214663210']
+        topJugador: ['34658996645', '573144157088' , '573144157088', '573232327405', '573214663210']
     },
     {
         nombre: 'Zhuxin',
@@ -361,7 +361,7 @@ module.exports = [
         roles: ['Combatiente'],
         linea: ['Jungle', 'EXP Lane'],
         build: ['Botas Duras', 'Hacha de guerra', 'Coraza de Fuerza Bruta', 'Alabarda de Mar', 'Oráculo', 'Inmortalidad'],
-        topJugador: ['573103839259','573218301741','573137428611','573232327405','573214663210']
+        topJugador: ['573103839259','573144157088','573218301741','573137428611','573232327405','573214663210']
     },
     {
         nombre: 'Roger',

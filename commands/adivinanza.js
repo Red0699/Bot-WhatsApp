@@ -7,10 +7,11 @@ module.exports = {
   async execute(client, message) {
     const chat = await message.getChat();
 
-    const { pista } = iniciarAdivinanza(chat.id._serialized);
+    const juego = iniciarAdivinanza(chat.id._serialized);
+    const pista = juego.pistas[0];
 
     await message.reply(
-      `🧠 *Adivinanza!*\n\n` +
+      `🧠 *¡Adivinanza!*\n\n` +
       `🔍 ${pista}\n\n` +
       `Envía tu intento con: *!respuesta <palabra>*`
     );

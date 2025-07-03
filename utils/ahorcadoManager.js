@@ -1,18 +1,25 @@
-// utils/ahorcadoManager.js
-
 const palabras = require('./ahorcadoPalabras');
 
-const juegos = {}; // clave: chatId
+const juegos = {};
+
+function normalizar(str) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
 
 function iniciarJuego(chatId) {
-    const palabra = palabras[Math.floor(Math.random() * palabras.length)].toLowerCase();
-    const oculto = '_'.repeat(palabra.length).split('');
+    const palabraReal = palabras[Math.floor(Math.random() * palabras.length)].toLowerCase();
+
+    const oculto = palabraReal.split('').map(c => (c === ' ' ? ' ' : '_'));
+
+    const intentos = Math.max(6, Math.ceil(palabraReal.replace(/\s/g, '').length * 0.4));
+
     juegos[chatId] = {
-        palabra,
+        palabra: palabraReal,
         oculto,
-        intentos: 6,
+        intentos,
         letrasUsadas: []
     };
+
     return juegos[chatId];
 }
 
@@ -20,15 +27,24 @@ function adivinarLetra(chatId, letra) {
     const juego = juegos[chatId];
     if (!juego) return null;
 
-    letra = letra.toLowerCase();
+    letra = normalizar(letra.toLowerCase());
     if (juego.letrasUsadas.includes(letra)) return 'usada';
 
     juego.letrasUsadas.push(letra);
 
-    if (juego.palabra.includes(letra)) {
-        for (let i = 0; i < juego.palabra.length; i++) {
-            if (juego.palabra[i] === letra) juego.oculto[i] = letra;
+    let acierto = false;
+
+    for (let i = 0; i < juego.palabra.length; i++) {
+        const letraReal = juego.palabra[i];
+        const letraNormalizada = normalizar(letraReal);
+
+        if (letraNormalizada === letra) {
+            juego.oculto[i] = letraReal; // conserva la tilde al mostrar
+            acierto = true;
         }
+    }
+
+    if (acierto) {
         return juego.oculto.join('') === juego.palabra ? 'ganaste' : 'acierto';
     } else {
         juego.intentos--;

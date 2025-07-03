@@ -1,24 +1,16 @@
-const { Client } = require('whatsapp-web.js');
+const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const fs = require('fs');
 const path = require('path');
+const connectDB = require('./config/db');
+//connectDB();
 
-// connectDB();
-
-// Inicializar el cliente sin LocalAuth
 const client = new Client({
-  puppeteer: {
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  }
+  authStrategy: new LocalAuth()
 });
 
 client.on('qr', (qr) => {
-  console.log('🔐 Escanea este código QR:');
   qrcode.generate(qr, { small: true });
-});
-
-client.on('ready', () => {
-  console.log('✅ Bot listo en Render');
 });
 
 // Cargar eventos dinámicamente desde /events
