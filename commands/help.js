@@ -25,6 +25,7 @@ module.exports = {
       'Comandos para jugar': '🎲',
       'Interacción': '💬',
       'Utilidades': '🛠️',
+      'Servicios': '🗝️',
       'Otros': '📦'
     };
 

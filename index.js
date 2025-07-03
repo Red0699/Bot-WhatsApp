@@ -3,6 +3,9 @@ const qrcode = require('qrcode-terminal');
 const fs = require('fs');
 const path = require('path');
 const connectDB = require('./config/db');
+
+require('dotenv').config();
+
 //connectDB();
 
 const client = new Client({
