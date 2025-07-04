@@ -1,8 +1,10 @@
 const { getGeminiResponse } = require('../services/geminiService');
+const { category } = require('./help');
 
 module.exports = {
   name: '!gemini',
   description: 'Envía un mensaje a Google Gemini y devuelve la respuesta',
+  category: 'Servicios',
   async execute(client, message) {
     const body = message.body.trim();
     const args = body.split(' ').slice(1);

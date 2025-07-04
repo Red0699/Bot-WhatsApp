@@ -16,7 +16,7 @@ async function getGeminiResponse(prompt) {
     {
       headers: {
         'Content-Type': 'application/json',
-        'X-goog-api-key': GOOGLE_API_KEY  // aunque en la URL ya va, puede dejarse igual
+        'X-goog-api-key': GOOGLE_API_KEY  
       }
     }
   );
