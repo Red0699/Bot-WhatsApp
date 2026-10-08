@@ -7,7 +7,7 @@ module.exports = {
   description: 'Adivina una letra del ahorcado. Ej: !letra a',
   category: 'Comandos para jugar',
   async execute(client, message) {
-    const chat = await message.getChat();
+    const chatId = message.from;
     const args = message.body.trim().split(' ');
     const letra = args[1]?.toLowerCase();
 
@@ -15,10 +15,10 @@ module.exports = {
       return message.reply('⚠️ Debes enviar una sola letra. Ej: !letra a');
     }
 
-    const resultado = adivinarLetra(chat.id._serialized, letra);
+    const resultado = adivinarLetra(chatId, letra);
     if (!resultado) return message.reply('❌ No hay un juego en curso. Usa !ahorcado');
 
-    const estado = estadoJuego(chat.id._serialized);
+    const estado = estadoJuego(chatId);
 
     if (resultado === 'usada') {
       return message.reply(`⚠️ Ya usaste la letra *${letra}*. Intenta otra.`);
@@ -33,12 +33,12 @@ module.exports = {
     }
 
     if (resultado === 'ganaste') {
-      finalizarJuego(chat.id._serialized);
+      finalizarJuego(chatId);
       return message.reply(`🏆 ¡Felicidades! Adivinaste la palabra: *${estado.palabra.replace(/ /g, '')}*`);
     }
 
     if (resultado === 'perdiste') {
-      finalizarJuego(chat.id._serialized);
+      finalizarJuego(chatId);
       return message.reply(`💀 ¡Perdiste! La palabra era: *${estado.palabraReal}*`);
     }
   }

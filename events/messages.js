@@ -1,45 +1,49 @@
 const fs = require('fs');
-const palabrasProhibidas = require('../utils/palabrasClave');
+const path = require('path');
+const { detectarPalabraProhibida } = require('../utils/wordFilter');
 
 module.exports = (client) => {
   client.on('message', async (message) => {
-    const chat = await message.getChat();
+    const command = message.body.split(' ')[0].toLowerCase();
+    const commandsPath = path.join(__dirname, '..', 'commands');
 
-    // Función para limpiar el texto del mensaje
-    const normalizarTexto = (texto) =>
-      texto
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '') 
-        .toLowerCase();
+    try {
+      const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-    // Detección de palabras 
-    if (chat.isGroup && !message.fromMe) {
-      const textoLimpio = normalizarTexto(message.body);
-      const palabraDetectada = palabrasProhibidas.find(p => textoLimpio.includes(normalizarTexto(p)));
-
-      if (palabraDetectada) {
-        const adminId = '573214663210@c.us';
-        const remitente = await message.getContact();
-
-        const alerta = 
-          `🚨 *Palabra detectada*\n\n` +
-          `📨 Mensaje: "${message.body}"\n` +
-          `👤 Enviado por: @${remitente.number}`;
-
-        await chat.sendMessage(alerta, {
-          mentions: [await client.getContactById(adminId), remitente]
-        });
+      for (const file of commandFiles) {
+        const cmd = require(path.join(commandsPath, file));
+        if (command === cmd.name) {
+          await cmd.execute(client, message);
+          break;
+        }
       }
+    } catch (error) {
+      console.error('❌ Error al ejecutar el comando:', error);
     }
 
-    // Comandos
-    const command = message.body.split(' ')[0].toLowerCase();
-    const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+    const chatId = message.from || message.id?.remote;
+    const texto = typeof message.body === 'string' ? message.body : '';
 
-    for (const file of commandFiles) {
-      const cmd = require(`../commands/${file}`);
-      if (command === cmd.name) {
-        cmd.execute(client, message);
+    if (!message.fromMe && chatId?.endsWith('@g.us')) {
+      const palabraDetectada = detectarPalabraProhibida(texto);
+
+      if (palabraDetectada) {
+        try {
+          const adminId = '573214663210@c.us';
+          const remitenteId = message.author;
+          const numeroRemitente = remitenteId?.split('@')[0] || 'desconocido';
+
+          const alerta =
+            `🚨 *Palabra detectada*\n\n` +
+            `📨 Mensaje: "${texto}"\n` +
+            `👤 Enviado por: @${numeroRemitente}`;
+
+          await client.sendMessage(chatId, alerta, {
+            mentions: remitenteId ? [adminId, remitenteId] : [adminId]
+          });
+        } catch (error) {
+          console.error('❌ Error al verificar la palabra en el grupo:', error);
+        }
       }
     }
   });

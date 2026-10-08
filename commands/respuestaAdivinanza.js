@@ -5,7 +5,6 @@ module.exports = {
   description: 'Envía tu intento de respuesta a la adivinanza',
   category: 'Comandos para jugar',
   async execute(client, message) {
-    const chat = await message.getChat();
     const args = message.body.trim().split(' ');
     const intento = args.slice(1).join(' ');
 
@@ -13,7 +12,7 @@ module.exports = {
       return message.reply('✍️ Debes escribir tu intento. Ej: !respuesta tinto');
     }
 
-    const chatId = chat.id._serialized;
+    const chatId = message.from;
 
     if (!juegoActivo(chatId)) {
       return message.reply('❌ No hay una adivinanza activa. Usa *!adivinanza* para comenzar.');

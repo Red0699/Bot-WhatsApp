@@ -5,13 +5,13 @@ module.exports = {
   description: 'Solicita una nueva pista de la adivinanza actual',
   category: 'Comandos para jugar',
   async execute(client, message) {
-    const chat = await message.getChat();
+    const chatId = message.from;
 
-    if (!juegoActivo(chat.id._serialized)) {
+    if (!juegoActivo(chatId)) {
       return message.reply('⚠️ No hay una adivinanza activa. Usa *!adivinanza* para iniciar.');
     }
 
-    const pista = obtenerPista(chat.id._serialized);
+    const pista = obtenerPista(chatId);
 
     if (!pista) {
       return message.reply('❌ No hay más pistas disponibles para esta adivinanza.');

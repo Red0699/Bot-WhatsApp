@@ -5,8 +5,7 @@ module.exports = {
   description: 'Te rindes en la adivinanza y el bot revela la respuesta.',
   category: 'Comandos para jugar',
   async execute(client, message) {
-    const chat = await message.getChat();
-    const id = chat.id._serialized;
+    const id = message.from;
 
     if (!juegoActivo(id)) {
       return message.reply('❌ No hay una adivinanza activa.');

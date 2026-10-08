@@ -5,8 +5,7 @@ module.exports = {
   description: 'Envía tu jugada en privado al bot',
   category: 'Comandos para jugar',
   async execute(client, message) {
-    const chat = await message.getChat();
-    if (chat.isGroup) {
+    if (message.from.endsWith('@g.us')) {
       return message.reply('⚠️ Este comando solo funciona por privado.');
     }
 
@@ -54,9 +53,8 @@ module.exports = {
       : `🏆 ¡Gana @${(winner === 1 ? p1 : p2).split('@')[0]}!`;
 
     // ✅ Enviar al grupo con menciones
-    const groupChat = await client.getChatById(grupoId);
-    await groupChat.sendMessage(resultMsg, {
-      mentions: [p1, p2].map(id => `${id.replace(/@c\.us$/, '')}@c.us`)
+    await client.sendMessage(grupoId, resultMsg, {
+      mentions: [p1, p2]
     });
 
     deleteMatch(grupoId);

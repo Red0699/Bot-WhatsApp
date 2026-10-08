@@ -5,8 +5,7 @@ module.exports = {
   description: 'Reta a otro usuario a jugar Piedra, Papel o Tijera. Ej: !ppt @usuario',
   category: 'Juegos',
   async execute(client, message) {
-    const chat = await message.getChat();
-    if (!chat.isGroup) return message.reply('❌ Solo puedes usar esto en un grupo');
+    if (!message.from.endsWith('@g.us')) return message.reply('❌ Solo puedes usar esto en un grupo');
 
     const mentions = message.mentionedIds;
 
@@ -14,15 +13,19 @@ module.exports = {
       return message.reply('⚠️ Debes mencionar a un solo usuario para jugar: `!ppt @usuario`');
     }
 
-    const player1 = message.author || message.from;
+    const player1 = message.author;
     const player2 = mentions[0];
 
-    const existing = getMatch(chat.id._serialized);
+    if (!player1 || player1 === player2) {
+      return message.reply('⚠️ Debes retar a otro participante del grupo.');
+    }
+
+    const existing = getMatch(message.from);
     if (existing) {
       return message.reply('⚔️ Ya hay una partida en curso en este grupo.');
     }
 
-    startMatch(chat.id._serialized, player1, player2);
+    startMatch(message.from, player1, player2);
 
     const msg =
       `🎮 *Partida iniciada de Piedra, Papel o Tijera:*\n` +
@@ -30,8 +33,8 @@ module.exports = {
       `👉 Ambos deben enviar su jugada con:\n` +
       `*(!jugada piedra | papel | tijera)*`;
 
-    await chat.sendMessage(msg, {
-      mentions: [player1, player2].map(id => `${id.replace(/@c\.us$/, '')}@c.us`)
+    await client.sendMessage(message.from, msg, {
+      mentions: [player1, player2]
     });
   }
 };

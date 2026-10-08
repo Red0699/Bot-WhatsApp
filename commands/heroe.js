@@ -19,9 +19,6 @@ module.exports = {
       return message.reply('❌ Héroe no encontrado. Asegúrate de escribirlo correctamente.');
     }
 
-    const chat = await message.getChat();
-    const chatId = chat.id._serialized;
-
     const topJugadores = Array.isArray(heroe.topJugador) ? heroe.topJugador : [];
     const menciones = topJugadores.map(num => `${num}@c.us`);
 
@@ -39,7 +36,7 @@ module.exports = {
     try {
       const media = await MessageMedia.fromUrl(heroe.imagen);
 
-      await client.sendMessage(chatId, media, {
+      await client.sendMessage(message.from, media, {
         caption,
         mentions: menciones
       });

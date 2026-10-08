@@ -3,8 +3,7 @@ module.exports = {
   description: 'Sword Bot se presenta con estilo en el grupo.',
   category: 'Interacción',
   async execute(client, message) {
-    const chat = await message.getChat();
-    const isGroup = chat.isGroup;
+    const isGroup = message.from.endsWith('@g.us');
 
     let intro = '⚔️ *Hola a todos!*\n\n';
     intro += 'Soy *Sword Bot*, un bot creado para ayudarte a interactuar y aprender.\n';
@@ -12,7 +11,7 @@ module.exports = {
     intro += 'Escribe `!help` para ver lo que puedo hacer.';
 
     if (isGroup) {
-      intro += `\n\nEste grupo se llama *${chat.name}* y me alegra estar aquí. ¡Vamos con toda! 💬`;
+      intro += '\n\nMe alegra estar aquí. ¡Vamos con toda! 💬';
     } else {
       intro += `\n\n¡Puedes escribirme directamente cuando quieras!`;
     }

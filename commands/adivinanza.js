@@ -5,9 +5,7 @@ module.exports = {
   description: 'Inicia una adivinanza con palabras colombianas',
   category: 'Juegos',
   async execute(client, message) {
-    const chat = await message.getChat();
-
-    const juego = iniciarAdivinanza(chat.id._serialized);
+    const juego = iniciarAdivinanza(message.from);
     const pista = juego.pistas[0];
 
     await message.reply(
