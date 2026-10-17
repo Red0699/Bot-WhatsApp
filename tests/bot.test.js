@@ -149,6 +149,79 @@ test('el filtro no alerta por mensajes privados ni mensajes propios', async () =
   assert.equal(sent.length, 0);
 });
 
+test('group_join da la bienvenida sin consultar getChat ni contactos', async () => {
+  const registerGroupJoin = require('../events/groupJoin');
+  let handler;
+  registerGroupJoin({
+    on(event, callback) {
+      if (event === 'group_join') handler = callback;
+    },
+    async getContactById() {
+      throw new Error('No debería consultar contactos');
+    }
+  });
+  const sent = [];
+  const notification = {
+    recipientIds: ['67890@lid'],
+    async getChat() {
+      throw new Error('No debería consultar notification.getChat()');
+    },
+    async reply(...args) {
+      sent.push(args);
+    }
+  };
+
+  await handler(notification);
+
+  assert.equal(sent.length, 1);
+  assert.match(sent[0][1].caption, /¡Bienvenido\(a\) al grupo/);
+  assert.deepEqual(sent[0][1].mentions, []);
+});
+
+test('group_join menciona IDs de teléfono compatibles', async () => {
+  const registerGroupJoin = require('../events/groupJoin');
+  let handler;
+  registerGroupJoin({
+    on(event, callback) {
+      if (event === 'group_join') handler = callback;
+    }
+  });
+  const sent = [];
+
+  await handler({
+    recipientIds: ['573214663210@c.us'],
+    async reply(...args) {
+      sent.push(args);
+    }
+  });
+
+  assert.equal(sent.length, 1);
+  assert.match(sent[0][1].caption, /@573214663210/);
+  assert.deepEqual(sent[0][1].mentions, ['573214663210@c.us']);
+});
+
+test('el registro de eventos declara explícitamente los eventos del cliente', () => {
+  const registerEvents = require('../events');
+  const registeredEvents = [];
+  registerEvents({
+    on(event) {
+      registeredEvents.push(event);
+    }
+  });
+
+  assert.deepEqual(registeredEvents.sort(), [
+    'auth_failure',
+    'authenticated',
+    'change_state',
+    'disconnected',
+    'group_join',
+    'loading_screen',
+    'message',
+    'qr',
+    'ready'
+  ]);
+});
+
 test('todos los comandos disponibles cargan y responden', async (t) => {
   const commandFiles = fs.readdirSync(commandsPath)
     .filter(file => file.endsWith('.js'))

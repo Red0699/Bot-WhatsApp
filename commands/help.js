@@ -1,42 +1,43 @@
-const fs = require('fs');
-const path = require('path');
+const { getCommands } = require('../utils/commandRegistry');
+const text = require('../utils/whatsappText');
 
 module.exports = {
   name: '!help',
   description: 'Muestra todos los comandos disponibles del bot.',
   category: 'Utilidades',
   async execute(client, message) {
-    const commandFiles = fs.readdirSync(__dirname)
-      .filter(file => file.endsWith('.js') && file !== 'help.js');
-
-    const categorias = {};
-
-    for (const file of commandFiles) {
-      const command = require(`./${file}`);
-      const categoria = command.category || 'Otros';
-      if (!categorias[categoria]) categorias[categoria] = [];
-      categorias[categoria].push(command);
-    }
-
-    let helpMessage = '📋 *Comandos disponibles:*\n\n';
-
+    const categories = new Map();
     const emojis = {
       'Juegos': '🎮',
       'Comandos para jugar': '🎲',
       'Interacción': '💬',
       'Utilidades': '🛠️',
-      'Servicios': '🗝️',
+      'Servicios': '✨',
       'Otros': '📦'
     };
 
-    for (const categoria in categorias) {
-      helpMessage += `*${emojis[categoria] || ''} ${categoria}:*\n`;
-      for (const cmd of categorias[categoria]) {
-        helpMessage += `• ${cmd.name} – ${cmd.description || 'Sin descripción'}\n`;
-      }
-      helpMessage += '\n';
+    for (const command of getCommands()) {
+      const category = command.category || 'Otros';
+      if (!categories.has(category)) categories.set(category, []);
+      categories.get(category).push(command);
     }
 
-    await message.reply(helpMessage.trim());
+    const sections = [...categories.entries()]
+      .sort(([a], [b]) => a.localeCompare(b, 'es'))
+      .map(([category, commands]) => {
+        const lines = commands
+          .sort((a, b) => a.name.localeCompare(b.name, 'es'))
+          .map(command => `• *${command.name}* — ${command.description || 'Sin descripción'}`);
+
+        return `*${emojis[category] || emojis.Otros} ${category}*\n${lines.join('\n')}`;
+      });
+
+    const helpMessage = [
+      text.title('Menú de comandos'),
+      ...sections,
+      text.hint('Escribe un comando tal como aparece para usarlo.')
+    ].join('\n\n');
+
+    await message.reply(helpMessage);
   }
 };

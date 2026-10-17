@@ -1,5 +1,3 @@
-const { category } = require("./grupo");
-
 module.exports = {
   name: '!hola',
   description: 'El bot te saluda con un mensaje amistoso.',

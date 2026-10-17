@@ -1,5 +1,4 @@
 const { getGeminiResponse } = require('../services/geminiService');
-const { category } = require('./help');
 
 module.exports = {
   name: '!gemini',
@@ -18,7 +17,8 @@ module.exports = {
       const response = await getGeminiResponse(prompt);
       await message.reply(response);
     } catch (error) {
-      console.error('Error al consultar Gemini:', error.message);
+      const details = error.response?.data?.error?.message || error.message;
+      console.error('Error al consultar Gemini:', details);
       await message.reply('⚠️ Ocurrió un error al consultar Google Gemini.');
     }
   }

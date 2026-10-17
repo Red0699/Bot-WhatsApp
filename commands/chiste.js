@@ -1,5 +1,4 @@
 const { getChiste } = require('../services/chistesApi');
-const { description } = require('./grupo');
 
 module.exports = {
   name: '!chiste',

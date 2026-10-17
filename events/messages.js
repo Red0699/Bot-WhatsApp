@@ -1,31 +1,32 @@
-const fs = require('fs');
-const path = require('path');
+const { getCommand } = require('../utils/commandRegistry');
 const { detectarPalabraProhibida } = require('../utils/wordFilter');
+const text = require('../utils/whatsappText');
 
 module.exports = (client) => {
   client.on('message', async (message) => {
-    const command = message.body.split(' ')[0].toLowerCase();
-    const commandsPath = path.join(__dirname, '..', 'commands');
+    const body = typeof message.body === 'string' ? message.body.trim() : '';
+    const commandName = body.split(/\s+/, 1)[0].toLowerCase();
 
-    try {
-      const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-
-      for (const file of commandFiles) {
-        const cmd = require(path.join(commandsPath, file));
-        if (command === cmd.name) {
-          await cmd.execute(client, message);
-          break;
+    if (commandName.startsWith('!')) {
+      const command = getCommand(commandName);
+      if (command) {
+        try {
+          await command.execute(client, message);
+        } catch (error) {
+          console.error(`❌ Error al ejecutar ${commandName}:`, error);
+          try {
+            await message.reply(text.error('No pude completar ese comando. Inténtalo de nuevo.'));
+          } catch (replyError) {
+            console.error(`❌ No pude responder al error de ${commandName}:`, replyError);
+          }
         }
       }
-    } catch (error) {
-      console.error('❌ Error al ejecutar el comando:', error);
     }
 
     const chatId = message.from || message.id?.remote;
-    const texto = typeof message.body === 'string' ? message.body : '';
 
     if (!message.fromMe && chatId?.endsWith('@g.us')) {
-      const palabraDetectada = detectarPalabraProhibida(texto);
+      const palabraDetectada = detectarPalabraProhibida(body);
 
       if (palabraDetectada) {
         try {
@@ -34,8 +35,8 @@ module.exports = (client) => {
           const numeroRemitente = remitenteId?.split('@')[0] || 'desconocido';
 
           const alerta =
-            `🚨 *Palabra detectada*\n\n` +
-            `📨 Mensaje: "${texto}"\n` +
+            `🚨 *Palabra detectada: ${palabraDetectada}*\n\n` +
+            `📨 Mensaje: "${body}"\n` +
             `👤 Enviado por: @${numeroRemitente}`;
 
           await client.sendMessage(chatId, alerta, {
