@@ -227,7 +227,7 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
     .filter(file => file.endsWith('.js'))
     .sort();
   const expectedCommands = [
-    'adivinanza.js', 'ahorcado.js', 'chiste.js', 'composicion.js', 'gemini.js',
+    'adivinanza.js', 'ahorcado.js', 'audio.js', 'chiste.js', 'composicion.js', 'gemini.js',
     'grupo.js', 'help.js', 'heroe.js', 'hola.js', 'jugada.js', 'letra.js',
     'pista.js', 'ppt.js', 'presentate.js', 'rendirse.js',
     'respuestaAdivinanza.js', 'tagall.js'
@@ -243,6 +243,40 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
   await t.test('!ahorcado', async () => {
     const result = await runCommand('ahorcado.js');
     assert.match(result.replies[0], /Nuevo juego de Ahorcado/);
+  });
+
+  await t.test('!audio', async () => {
+    await withModuleStub('../services/youtubeSearch', {
+      searchYouTube: async query => [{
+        title: `Resultado para ${query}`,
+        channel: 'Canal de prueba',
+        duration: '',
+        url: 'https://www.youtube.com/watch?v=abcdefghijk'
+      }]
+    }, async () => {
+      const result = await runCommand('audio.js', { body: '!audio música clásica' });
+      assert.equal(result.replies.length, 1);
+      assert.match(result.replies[0], /Resultado para música clásica/);
+      assert.match(result.replies[0], /Canal de prueba/);
+      assert.match(result.replies[0], /youtube\.com\/watch/);
+    });
+  });
+
+  await t.test('!audio comparte enlaces de YouTube sin descargar audio', async () => {
+    await withModuleStub('../services/youtubeSearch', {
+      searchYouTube: async () => [{
+        title: 'Video de YouTube',
+        channel: 'Abre el enlace para ver los detalles',
+        duration: '',
+        url: 'https://www.youtube.com/watch?v=abcdefghijk'
+      }]
+    }, async () => {
+      const result = await runCommand('audio.js', {
+        body: '!audio https://youtu.be/abcdefghijk'
+      });
+      assert.equal(result.sent.length, 0);
+      assert.match(result.replies[0], /youtube\.com\/watch\?v=abcdefghijk/);
+    });
   });
 
   await t.test('!chiste', async () => {

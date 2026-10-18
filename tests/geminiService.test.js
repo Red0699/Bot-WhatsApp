@@ -90,3 +90,65 @@ test('getGeminiResponse informa si falta la clave de API', async () => {
     }
   }
 });
+
+test('getGeminiResponse reintenta errores temporales del servicio', async () => {
+  const previousApiKey = process.env.GOOGLE_API_KEY;
+  process.env.GOOGLE_API_KEY = 'test-api-key';
+  let attempts = 0;
+
+  try {
+    await withAxiosStub({
+      async post() {
+        attempts += 1;
+        if (attempts === 1) {
+          const error = new Error('Alta demanda');
+          error.response = { status: 503 };
+          throw error;
+        }
+
+        return {
+          data: {
+            candidates: [{ content: { parts: [{ text: 'Respuesta' }] } }]
+          }
+        };
+      }
+    }, async ({ getGeminiResponse }) => {
+      assert.equal(await getGeminiResponse('Hola'), 'Respuesta');
+    });
+  } finally {
+    if (previousApiKey === undefined) {
+      delete process.env.GOOGLE_API_KEY;
+    } else {
+      process.env.GOOGLE_API_KEY = previousApiKey;
+    }
+  }
+
+  assert.equal(attempts, 2);
+});
+
+test('getGeminiResponse no reintenta errores que no son temporales', async () => {
+  const previousApiKey = process.env.GOOGLE_API_KEY;
+  process.env.GOOGLE_API_KEY = 'test-api-key';
+  const error = new Error('Solicitud inválida');
+  error.response = { status: 400 };
+  let attempts = 0;
+
+  try {
+    await withAxiosStub({
+      async post() {
+        attempts += 1;
+        throw error;
+      }
+    }, async ({ getGeminiResponse }) => {
+      await assert.rejects(getGeminiResponse('Hola'), error);
+    });
+  } finally {
+    if (previousApiKey === undefined) {
+      delete process.env.GOOGLE_API_KEY;
+    } else {
+      process.env.GOOGLE_API_KEY = previousApiKey;
+    }
+  }
+
+  assert.equal(attempts, 1);
+});

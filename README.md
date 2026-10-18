@@ -23,7 +23,15 @@ Para usar `!gemini`, crea un archivo `.env` en la raíz y agrega:
 GOOGLE_API_KEY=tu_clave_de_google
 ```
 
-El comando usa el modelo `gemini-3.8-flash` de la API de Gemini. Si falla, revisa la consola para ver el detalle del error devuelto por Google y confirma que la clave sea válida.
+El comando usa el modelo `gemini-3.8-flash` de la API de Gemini y reintenta hasta dos veces si Google devuelve un error temporal de alta demanda o límite de solicitudes. Si sigue fallando, revisa la consola para ver el detalle del error y vuelve a intentarlo más tarde.
+
+Para buscar el primer resultado de YouTube por nombre, configura una clave de Google Cloud con **YouTube Data API v3** habilitada en `.env`:
+
+```env
+YOUTUBE_API_KEY=tu_clave_de_youtube_data_api
+```
+
+El comando `!audio <búsqueda>` comparte el título, canal y enlace del primer resultado de YouTube. También acepta enlaces de YouTube y los comparte en formato canónico. No descarga ni adjunta el audio. La API de búsqueda requiere su propia clave habilitada para YouTube Data API v3; la clave de Gemini puede no tener ese acceso.
 
 ## Comandos
 
