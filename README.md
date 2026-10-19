@@ -17,6 +17,8 @@ npm start
 
 La primera ejecución muestra un QR. Escanéalo desde **WhatsApp → Dispositivos vinculados**. La sesión local se conserva en `.wwebjs_auth`; no compartas ni publiques esa carpeta.
 
+El `postinstall` aplica una corrección compatible con la versión instalada de `whatsapp-web.js` para mantener el envío de imágenes funcionando con las versiones recientes de WhatsApp Web. Si ya instalaste las dependencias, ejecuta `npm install` una vez y reinicia el bot.
+
 Para usar `!gemini`, crea un archivo `.env` en la raíz y agrega:
 
 ```env
@@ -79,4 +81,8 @@ Las pruebas usan dobles locales para WhatsApp y los servicios externos: no enví
 
 Los mensajes usan el formato integrado de WhatsApp (`*negrita*`, `_cursiva_` y emojis); no hace falta instalar una librería de estilos de terminal para cambiar cómo se ven en WhatsApp.
 
+El comando `!todos` utiliza la mención general `@all` sin enumerar los números de los participantes. El aviso depende de que WhatsApp admita esa función en el grupo y en la cuenta vinculada.
+
 Los eventos se registran explícitamente en `events/index.js`. Para agregar un evento, crea su manejador en `events/` y regístralo allí; así el orden y el conjunto de eventos quedan claros y no se cargan archivos auxiliares por accidente.
+
+El bot envía una bienvenida con `media/images/approved.webp` cuando alguien entra y una despedida con `media/images/despedida.PNG` cuando un integrante abandona o es retirado de un grupo. Si WhatsApp no puede enviar la imagen, envía el texto de todos modos.

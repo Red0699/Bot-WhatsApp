@@ -4,6 +4,7 @@
   "description": "Bot para grupo de WhatsApp",
   "main": "index.js",
   "scripts": {
+    "postinstall": "node scripts/patch-whatsapp-web-media-id.js",
     "start": "node index.js",
     "test": "node --test"
   },

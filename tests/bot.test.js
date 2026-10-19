@@ -1,10 +1,43 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 const Module = require('node:module');
 const test = require('node:test');
 
 const commandsPath = path.join(__dirname, '..', 'commands');
+
+test('la corrección de whatsapp-web.js elimina el ID privado de medios y es idempotente', () => {
+  const { patchMediaMessageId } = require('../scripts/patch-whatsapp-web-media-id');
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'whatsapp-media-id-'));
+  const utilsPath = path.join(directory, 'Utils.js');
+  const anchor = "        // Bot's won't reply if canonicalUrl is set (linking)\n";
+  fs.writeFileSync(utilsPath, `message.__x_id = 'media-id';\n${anchor}`);
+
+  try {
+    assert.equal(patchMediaMessageId(utilsPath), true);
+    assert.equal(patchMediaMessageId(utilsPath), false);
+    assert.equal(
+      fs.readFileSync(utilsPath, 'utf8'),
+      `message.__x_id = 'media-id';\n        delete message.__x_id;\n\n${anchor}`
+    );
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
+
+test('la corrección de whatsapp-web.js falla explícitamente si cambia el código de origen', () => {
+  const { patchMediaMessageId } = require('../scripts/patch-whatsapp-web-media-id');
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'whatsapp-media-id-'));
+  const utilsPath = path.join(directory, 'Utils.js');
+  fs.writeFileSync(utilsPath, 'unexpected source');
+
+  try {
+    assert.throws(patchMediaMessageId.bind(null, utilsPath), /punto de inserción/);
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
 
 function createHarness({ body = '', from = '12345@g.us', author, mentionedIds = [] } = {}) {
   const replies = [];
@@ -149,55 +182,163 @@ test('el filtro no alerta por mensajes privados ni mensajes propios', async () =
   assert.equal(sent.length, 0);
 });
 
-test('group_join da la bienvenida sin consultar getChat ni contactos', async () => {
+test('group_join envía la bienvenida desde el chat de grupo sin consultar contactos', async () => {
   const registerGroupJoin = require('../events/groupJoin');
   let handler;
+  const sent = [];
+  const groupId = '12345@g.us';
   registerGroupJoin({
     on(event, callback) {
       if (event === 'group_join') handler = callback;
     },
     async getContactById() {
       throw new Error('No debería consultar contactos');
+    },
+    async getChatById() {
+      throw new Error('No debería convertir el grupo a un modelo Chat');
+    },
+    async sendMessage(...args) {
+      sent.push(args);
     }
   });
-  const sent = [];
   const notification = {
+    chatId: groupId,
     recipientIds: ['67890@lid'],
     async getChat() {
       throw new Error('No debería consultar notification.getChat()');
     },
-    async reply(...args) {
-      sent.push(args);
+    async reply() {
+      throw new Error('La bienvenida debe enviar al ID explícito del grupo');
     }
   };
 
   await handler(notification);
 
   assert.equal(sent.length, 1);
-  assert.match(sent[0][1].caption, /¡Bienvenido\(a\) al grupo/);
-  assert.deepEqual(sent[0][1].mentions, []);
+  assert.equal(sent[0][0], '12345@g.us');
+  assert.equal(sent[0][1].mimetype, 'image/webp');
+  assert.match(sent[0][2].caption, /¡Bienvenido\(a\) al grupo/);
+  assert.equal(sent[0][2].mentions, undefined);
 });
 
-test('group_join menciona IDs de teléfono compatibles', async () => {
+test('group_join usa el ID remoto cuando chatId no está disponible', async () => {
   const registerGroupJoin = require('../events/groupJoin');
   let handler;
+  const sent = [];
   registerGroupJoin({
     on(event, callback) {
       if (event === 'group_join') handler = callback;
-    }
-  });
-  const sent = [];
-
-  await handler({
-    recipientIds: ['573214663210@c.us'],
-    async reply(...args) {
+    },
+    async sendMessage(...args) {
       sent.push(args);
     }
   });
 
+  await handler({
+    id: { remote: { _serialized: '54321@g.us' } },
+    recipientIds: ['67890@lid']
+  });
+
   assert.equal(sent.length, 1);
-  assert.match(sent[0][1].caption, /@573214663210/);
-  assert.deepEqual(sent[0][1].mentions, ['573214663210@c.us']);
+  assert.equal(sent[0][0], '54321@g.us');
+  assert.equal(sent[0][1].mimetype, 'image/webp');
+  assert.match(sent[0][2].caption, /¡Bienvenido\(a\) al grupo/);
+});
+
+test('group_join recurre a texto y no reintenta si WhatsApp rechaza la imagen', async () => {
+  const registerGroupJoin = require('../events/groupJoin');
+  let handler;
+  let attempts = 0;
+  const sent = [];
+  const originalConsoleError = console.error;
+
+  registerGroupJoin({
+    on(event, callback) {
+      if (event === 'group_join') handler = callback;
+    },
+    async sendMessage(...args) {
+      if (args[1]?.mimetype) {
+        attempts += 1;
+        throw new Error('WhatsApp Web no pudo enviar la imagen');
+      }
+      sent.push(args);
+    }
+  });
+  console.error = () => {};
+
+  try {
+    await handler({
+      chatId: '12345@g.us',
+      async reply() {
+        throw new Error('No se debe usar reply');
+      }
+    });
+  } finally {
+    console.error = originalConsoleError;
+  }
+
+  assert.equal(attempts, 1);
+  assert.equal(sent.length, 1);
+  assert.equal(sent[0][0], '12345@g.us');
+  assert.match(sent[0][1], /¡Bienvenido\(a\) al grupo/);
+});
+
+test('group_leave envía la despedida con imagen si alguien sale o es retirado', async () => {
+  const registerGroupLeave = require('../events/groupLeave');
+  let handler;
+  const sent = [];
+  registerGroupLeave({
+    on(event, callback) {
+      if (event === 'group_leave') handler = callback;
+    },
+    async sendMessage(...args) {
+      sent.push(args);
+    }
+  });
+
+  await handler({
+    chatId: '12345@g.us',
+    type: 'leave',
+    recipientIds: ['67890@lid']
+  });
+  await handler({
+    id: { remote: { _serialized: '12345@g.us' } },
+    type: 'remove',
+    recipientIds: ['67890@lid']
+  });
+
+  assert.equal(sent.length, 2);
+  assert.equal(sent[0][0], '12345@g.us');
+  assert.equal(sent[0][1].mimetype, 'image/png');
+  assert.match(sent[0][2].caption, /Un integrante ha abandonado el grupo/);
+  assert.match(sent[1][2].caption, /Un integrante ha sido expulsado del grupo/);
+});
+
+test('group_leave envía el texto de despedida si falla la imagen', async () => {
+  const registerGroupLeave = require('../events/groupLeave');
+  let handler;
+  const sent = [];
+  const originalConsoleError = console.error;
+  registerGroupLeave({
+    on(event, callback) {
+      if (event === 'group_leave') handler = callback;
+    },
+    async sendMessage(...args) {
+      if (args[1]?.mimetype) throw new Error('WhatsApp Web no pudo enviar la imagen');
+      sent.push(args);
+    }
+  });
+  console.error = () => {};
+
+  try {
+    await handler({ chatId: '12345@g.us', type: 'leave', recipientIds: ['67890@lid'] });
+  } finally {
+    console.error = originalConsoleError;
+  }
+
+  assert.equal(sent.length, 1);
+  assert.equal(sent[0][0], '12345@g.us');
+  assert.match(sent[0][1], /ha abandonado el grupo/);
 });
 
 test('el registro de eventos declara explícitamente los eventos del cliente', () => {
@@ -215,6 +356,7 @@ test('el registro de eventos declara explícitamente los eventos del cliente', (
     'change_state',
     'disconnected',
     'group_join',
+    'group_leave',
     'loading_screen',
     'message',
     'qr',
@@ -307,6 +449,33 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
   await t.test('!grupo', async () => {
     const result = await runCommand('grupo.js');
     assert.match(result.replies[0], /Grupo de prueba/);
+  });
+
+  await t.test('!grupo recupera los datos almacenados si falla la consulta del chat', async () => {
+    const command = require('../commands/grupo');
+    const replies = [];
+    const message = {
+      body: '!grupo',
+      from: '12345@g.us',
+      async reply(text) {
+        replies.push(text);
+      }
+    };
+    const client = {
+      async getChatById() {
+        throw new Error('No se pudo actualizar el grupo');
+      },
+      pupPage: {
+        async evaluate(callback, chatId) {
+          assert.equal(chatId, message.from);
+          return { name: 'Grupo en caché', participantCount: 4 };
+        }
+      }
+    };
+
+    await command.execute(client, message);
+    assert.match(replies[0], /Grupo en caché/);
+    assert.match(replies[0], /4 participantes/);
   });
 
   await t.test('!help', async () => {
@@ -556,9 +725,34 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
   });
 
   await t.test('!todos', async () => {
-    const result = await runCommand('tagall.js');
-    assert.equal(result.sent.length, 1);
-    assert.match(result.sent[0][1], /Atención todos/);
-    assert.equal(result.sent[0][2].mentions.length, 1);
+    const command = require('../commands/tagall');
+    const sent = [];
+    const replies = [];
+    const message = {
+      body: '!todos',
+      from: '12345@g.us',
+      async reply(text) {
+        replies.push(text);
+      }
+    };
+    const client = {
+      async getChatById() {
+        throw new Error('!todos no debe cargar el chat');
+      },
+      async getContactById() {
+        throw new Error('!todos no debe cargar los contactos');
+      },
+      async sendMessage(...args) {
+        sent.push(args);
+      }
+    };
+
+    await command.execute(client, message);
+    assert.equal(replies.length, 0);
+    assert.equal(sent.length, 1);
+    assert.match(sent[0][1], /Atención a todos/);
+    assert.match(sent[0][1], /@all/);
+    assert.equal(sent[0][2].mentions, undefined);
+    assert.equal(sent[0][2].extra.nonJidMentions, 1);
   });
 });
