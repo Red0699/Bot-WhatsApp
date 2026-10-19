@@ -33,6 +33,25 @@ YOUTUBE_API_KEY=tu_clave_de_youtube_data_api
 
 El comando `!audio <búsqueda>` comparte el título, canal y enlace del primer resultado de YouTube. También acepta enlaces de YouTube y los comparte en formato canónico. No descarga ni adjunta el audio. La API de búsqueda requiere su propia clave habilitada para YouTube Data API v3; la clave de Gemini puede no tener ese acceso.
 
+Los comandos de Mobile Legends consumen la API pública de [Rone Arena](https://arena.rone.dev). No necesitan una clave. Opcionalmente, puedes configurar `RONE_API_BASE_URL` en `.env` para usar otra instancia compatible:
+
+```env
+RONE_API_BASE_URL=https://arena.rone.dev
+```
+
+Comandos disponibles:
+
+- `!mlrank [rango]`: mejores héroes por win rate (rango `all`, `epic`, `legend`, `mythic`, `honor` o `glory`).
+- `!heroe <héroe>`: detalles e imagen del héroe.
+- `!mlstats <héroe> [rango]`: win rate, pick rate y ban rate.
+- `!mlcounters <héroe> [rango]`: héroes que mejor lo contrarrestan.
+- `!mlcompat <héroe> [rango]`: mejores aliados y sinergia.
+- `!mlbuild <héroe> <línea> [rango]`: builds para `exp`, `mid`, `roam`, `jungle` o `gold`.
+- `!mltendencias <héroe> [rango]`: tendencia reciente del win rate.
+- `!mlitems [nombre]`: lista o busca objetos.
+
+Los comandos que consultan un héroe adjuntan su imagen cuando la API la incluye. Rone Arena es un proyecto comunitario no oficial; sus datos y disponibilidad dependen del servicio externo.
+
 ## Comandos
 
 Envía `!help` en WhatsApp para ver el menú actualizado de comandos y juegos. Los comandos grupales que necesitan leer miembros del grupo solo funcionan en grupos.

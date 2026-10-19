@@ -1,48 +1,35 @@
-const { MessageMedia } = require('whatsapp-web.js');
-const heroes = require('../utils/heroesData');
+const roneApi = require('../services/roneApi');
+const { createRoneCommand } = require('../utils/roneCommand');
+const {
+  heroData,
+  heroImage,
+  cleanText,
+  replyWithImage
+} = require('../utils/roneFormatting');
 
-module.exports = {
+module.exports = createRoneCommand({
   name: '!heroe',
-  description: 'Muestra la información de un héroe de Mobile Legends',
-  category: 'Utilidades',
-  async execute(client, message) {
-    const args = message.body.trim().split(' ');
-    const nombre = args.slice(1).join(' ').toLowerCase();
-
-    if (!nombre) {
-      return message.reply('⚠️ Debes escribir el nombre del héroe. Ej: !heroe Pharsa');
+  description: 'Muestra los detalles e imagen de un héroe de Mobile Legends',
+  usage: '!heroe <nombre del héroe>',
+  execute: async (client, message, args) => {
+    const record = await roneApi.getHero(args.join(' '));
+    if (!record) {
+      return message.reply('❌ No encontré ese héroe. Revisa el nombre e inténtalo de nuevo.');
     }
 
-    const heroe = heroes.find(h => h.nombre.toLowerCase() === nombre);
+    const hero = heroData(record);
+    const roles = Array.isArray(hero.sortlabel) ? hero.sortlabel.filter(Boolean) : [];
+    const lanes = Array.isArray(hero.roadsortlabel) ? hero.roadsortlabel.filter(Boolean) : [];
+    const specialties = Array.isArray(hero.speciality) ? hero.speciality.filter(Boolean) : [];
+    const story = cleanText(hero.story, '');
+    const lines = [
+      `🟢 *${cleanText(hero.name, args.join(' '))}*`,
+      roles.length ? `⚔️ Rol: ${roles.join(', ')}` : null,
+      lanes.length ? `🧭 Líneas: ${lanes.join(', ')}` : null,
+      specialties.length ? `✨ Especialidad: ${specialties.join(', ')}` : null,
+      story ? `📖 ${story}` : null
+    ].filter(Boolean);
 
-    if (!heroe) {
-      return message.reply('❌ Héroe no encontrado. Asegúrate de escribirlo correctamente.');
-    }
-
-    const topJugadores = Array.isArray(heroe.topJugador) ? heroe.topJugador : [];
-    const menciones = topJugadores.map(num => `${num}@c.us`);
-
-    const topJugadorTexto = topJugadores.length
-      ? `👤 Más usado por:\n- ${topJugadores.map(num => `@${num}`).join('\n- ')}`
-      : '👤 Más usado por: *Nadie aún*';
-
-    const caption =
-      `🟢 *${heroe.nombre}*\n` +
-      `⚔️ Rol: ${heroe.roles.join(', ')}\n` +
-      `🧭 Líneas jugadas: ${heroe.linea.join(', ')}\n` +
-      `🛡 Build recomendada:\n- ${heroe.build.join('\n- ')}\n\n` +
-      `${topJugadorTexto}`;
-
-    try {
-      const media = await MessageMedia.fromUrl(heroe.imagen);
-
-      await client.sendMessage(message.from, media, {
-        caption,
-        mentions: menciones
-      });
-    } catch (error) {
-      console.error('❌ Error al enviar imagen:', error.message);
-      await message.reply('⚠️ No se pudo cargar la imagen del héroe.');
-    }
+    await replyWithImage(client, message, heroImage(record), lines.join('\n'));
   }
-};
+});

@@ -229,7 +229,8 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
   const expectedCommands = [
     'adivinanza.js', 'ahorcado.js', 'audio.js', 'chiste.js', 'composicion.js', 'gemini.js',
     'grupo.js', 'help.js', 'heroe.js', 'hola.js', 'jugada.js', 'letra.js',
-    'pista.js', 'ppt.js', 'presentate.js', 'rendirse.js',
+    'mlbuild.js', 'mlcompat.js', 'mlcounters.js', 'mlitems.js', 'mlrank.js', 'mlstats.js',
+    'mltendencias.js', 'pista.js', 'ppt.js', 'presentate.js', 'rendirse.js',
     'respuestaAdivinanza.js', 'tagall.js'
   ].sort();
 
@@ -315,17 +316,157 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
   });
 
   await t.test('!heroe', async () => {
-    const { MessageMedia } = require('whatsapp-web.js');
-    const originalFromUrl = MessageMedia.fromUrl;
-    MessageMedia.fromUrl = async () => ({ testMedia: true });
+    const axios = require('axios');
+    const originalGet = axios.get;
+    axios.get = async () => ({
+      data: Buffer.from('image-data'),
+      headers: { 'content-type': 'image/png; charset=binary' }
+    });
 
     try {
-      const result = await runCommand('heroe.js', { body: '!heroe Pharsa' });
-      assert.equal(result.sent.length, 1);
-      assert.match(result.sent[0][2].caption, /Pharsa/);
+      await withModuleStub('../services/roneApi', {
+        getHero: async () => ({
+          data: {
+            hero: {
+              data: {
+                name: 'Pharsa',
+                head: 'https://example.com/pharsa.png',
+                sortlabel: ['Mage'],
+                roadsortlabel: ['Mid Lane'],
+                speciality: ['Burst'],
+                story: 'Crow Princess'
+              }
+            }
+          }
+        })
+      }, async () => {
+        const result = await runCommand('heroe.js', { body: '!heroe Pharsa' });
+        assert.equal(result.sent.length, 1);
+        assert.equal(result.sent[0][1].mimetype, 'image/png');
+        assert.equal(result.sent[0][1].data, Buffer.from('image-data').toString('base64'));
+        assert.match(result.sent[0][2].caption, /Pharsa/);
+        assert.match(result.sent[0][2].caption, /Mid Lane/);
+      });
     } finally {
-      MessageMedia.fromUrl = originalFromUrl;
+      axios.get = originalGet;
     }
+  });
+
+  await t.test('!mlrank muestra los mejores héroes y sus tasas', async () => {
+    await withModuleStub('../services/roneApi', {
+      normalizeRank: value => value,
+      getRankStatistics: async () => ({
+        records: [{
+          data: {
+            main_hero: { data: { name: 'Pharsa' } },
+            main_hero_win_rate: 0.6,
+            main_hero_appearance_rate: 0.2,
+            main_hero_ban_rate: 0.1
+          }
+        }]
+      })
+    }, async () => {
+      const result = await runCommand('mlrank.js', { body: '!mlrank mythic' });
+      assert.match(result.replies[0], /Pharsa/);
+      assert.match(result.replies[0], /60\.00%/);
+    });
+  });
+
+  await t.test('!mlcounters y !mlcompat muestran nombres asociados a sus héroes', async () => {
+    await withModuleStub('../services/roneApi', {
+      normalizeRank: value => value,
+      getHeroCounters: async () => ({
+        records: [{
+          data: {
+            main_hero: { data: { name: 'Pharsa' } },
+            sub_hero: [{ heroid: 10, hero_win_rate: 0.55, increase_win_rate: 0.03 }]
+          }
+        }]
+      }),
+      getHeroCompatibility: async () => ({
+        records: [{
+          data: {
+            main_hero: { data: { name: 'Pharsa' } },
+            sub_hero: [{ heroid: 10, hero_win_rate: 0.55, increase_win_rate: 0.03 }]
+          }
+        }]
+      }),
+      getHeroNamesById: async () => new Map([['10', 'Franco']])
+    }, async () => {
+      const counterResult = await runCommand('mlcounters.js', { body: '!mlcounters Pharsa' });
+      assert.match(counterResult.replies[0], /Franco/);
+
+      const compatibilityResult = await runCommand('mlcompat.js', { body: '!mlcompat Pharsa' });
+      assert.match(compatibilityResult.replies[0], /Franco/);
+    });
+  });
+
+  await t.test('!mlitems permite buscar un objeto', async () => {
+    await withModuleStub('../services/roneApi', {
+      getItems: async () => [
+        { equipname: 'Magic Shoes', equipid: 1 },
+        { equipname: 'Warrior Boots', equipid: 2 }
+      ]
+    }, async () => {
+      const result = await runCommand('mlitems.js', { body: '!mlitems magic' });
+      assert.match(result.replies[0], /Magic Shoes/);
+      assert.doesNotMatch(result.replies[0], /Warrior Boots/);
+    });
+  });
+
+  await t.test('!mlbuild muestra la build asociada a la línea solicitada', async () => {
+    await withModuleStub('../services/roneApi', {
+      normalizeRank: value => value,
+      getHeroBuilds: async () => ({
+        records: [{
+          data: {
+            hero_name: 'Pharsa',
+            build: [{
+              equipid: [1, 2],
+              build_win_rate: 0.54,
+              build_pick_rate: 0.08
+            }]
+          }
+        }]
+      }),
+      getItems: async () => [
+        { equipid: 1, equipname: 'Magic Shoes' },
+        { equipid: 2, equipname: 'Holy Crystal' }
+      ],
+      getHero: async () => null
+    }, async () => {
+      const result = await runCommand('mlbuild.js', { body: '!mlbuild Pharsa mid' });
+      assert.match(result.replies[0], /Magic Shoes → Holy Crystal/);
+      assert.match(result.replies[0], /Mid Lane/);
+    });
+  });
+
+  await t.test('!mlstats y !mltendencias muestran datos recientes del héroe', async () => {
+    await withModuleStub('../services/roneApi', {
+      normalizeRank: value => value,
+      getHeroStatistics: async () => ({
+        records: [{
+          data: {
+            main_hero: { data: { name: 'Pharsa' } },
+            main_hero_win_rate: 0.51,
+            main_hero_appearance_rate: 0.04,
+            main_hero_ban_rate: 0.02
+          }
+        }]
+      }),
+      getHeroTrends: async () => ({
+        records: [{ data: { win_rate: 0.52 } }]
+      }),
+      getHero: async () => ({
+        data: { hero: { data: { name: 'Pharsa' } } }
+      })
+    }, async () => {
+      const stats = await runCommand('mlstats.js', { body: '!mlstats Pharsa mythic' });
+      assert.match(stats.replies[0], /51\.00%/);
+
+      const trends = await runCommand('mltendencias.js', { body: '!mltendencias Pharsa' });
+      assert.match(trends.replies[0], /52\.00%/);
+    });
   });
 
   await t.test('!hola', async () => {
