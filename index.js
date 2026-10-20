@@ -3,6 +3,7 @@ const { loadEnvironment } = require('./config/env');
 loadEnvironment();
 
 const { createWhatsAppClient } = require('./config/whatsapp');
+const { disconnectDatabase } = require('./services/amongChatStats');
 const registerEvents = require('./events');
 const client = createWhatsAppClient();
 
@@ -25,6 +26,14 @@ async function shutdown(signal) {
     console.log('✅ Cliente de WhatsApp cerrado correctamente.');
   } catch (error) {
     console.error('❌ Error al cerrar el cliente de WhatsApp:', error);
+    process.exitCode = 1;
+  }
+
+  try {
+    await disconnectDatabase();
+    console.log('✅ Conexión de MongoDB cerrada correctamente.');
+  } catch (error) {
+    console.error('❌ Error al cerrar la conexión de MongoDB:', error);
     process.exitCode = 1;
   }
 }

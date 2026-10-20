@@ -1,5 +1,5 @@
-const roneApi = require('../services/roneApi');
-const { createRoneCommand } = require('../utils/roneCommand');
+const roneApi = require('../../services/roneApi');
+const { createRoneCommand } = require('../../utils/roneCommand');
 const {
   recordsFrom,
   heroName,
@@ -8,7 +8,7 @@ const {
   replyWithImage,
   unwrapRecord,
   rankName
-} = require('../utils/roneFormatting');
+} = require('../../utils/roneFormatting');
 
 module.exports = createRoneCommand({
   name: '!mltendencias',

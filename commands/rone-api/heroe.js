@@ -1,11 +1,11 @@
-const roneApi = require('../services/roneApi');
-const { createRoneCommand } = require('../utils/roneCommand');
+const roneApi = require('../../services/roneApi');
+const { createRoneCommand } = require('../../utils/roneCommand');
 const {
   heroData,
   heroImage,
   cleanText,
   replyWithImage
-} = require('../utils/roneFormatting');
+} = require('../../utils/roneFormatting');
 
 module.exports = createRoneCommand({
   name: '!heroe',

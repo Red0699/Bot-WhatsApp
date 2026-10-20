@@ -1,4 +1,4 @@
-const { verificarRespuesta, juegoActivo } = require('../utils/adivinanzaManager');
+const { verificarRespuesta, juegoActivo } = require('../../utils/adivinanzaManager');
 
 module.exports = {
   name: '!respuesta',

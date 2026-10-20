@@ -1,6 +1,6 @@
-const roneApi = require('../services/roneApi');
-const { createRoneCommand } = require('../utils/roneCommand');
-const { cleanText, percent, replyWithImage } = require('../utils/roneFormatting');
+const roneApi = require('../../services/roneApi');
+const { createRoneCommand } = require('../../utils/roneCommand');
+const { cleanText, percent, replyWithImage } = require('../../utils/roneFormatting');
 
 module.exports = createRoneCommand({
   name: '!mlitems',

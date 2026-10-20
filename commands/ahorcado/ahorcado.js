@@ -1,6 +1,6 @@
 // commands/ahorcado.js
 
-const { iniciarJuego, estadoJuego } = require('../utils/ahorcadoManager');
+const { iniciarJuego, estadoJuego } = require('../../utils/ahorcadoManager');
 
 module.exports = {
   name: '!ahorcado',

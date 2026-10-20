@@ -5,18 +5,26 @@ const commandsPath = path.join(__dirname, '..', 'commands');
 const commandsByName = new Map();
 let loaded = false;
 
+function getCommandFiles(directory = commandsPath) {
+  return fs.readdirSync(directory, { withFileTypes: true })
+    .flatMap(entry => {
+      const entryPath = path.join(directory, entry.name);
+      if (entry.isDirectory()) return getCommandFiles(entryPath);
+      return entry.isFile() && entry.name.endsWith('.js') ? [entryPath] : [];
+    })
+    .sort();
+}
+
 function loadCommands() {
   if (loaded) return;
 
-  const files = fs.readdirSync(commandsPath)
-    .filter(file => file.endsWith('.js'))
-    .sort();
+  const files = getCommandFiles();
 
   for (const file of files) {
-    const command = require(path.join(commandsPath, file));
+    const command = require(file);
 
     if (!command.name || typeof command.execute !== 'function') {
-      throw new Error(`El archivo ${file} debe exportar name y execute().`);
+      throw new Error(`El archivo ${path.relative(commandsPath, file)} debe exportar name y execute().`);
     }
 
     if (commandsByName.has(command.name)) {

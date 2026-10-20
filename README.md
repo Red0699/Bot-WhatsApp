@@ -54,6 +54,29 @@ Comandos disponibles:
 
 Los comandos que consultan un héroe adjuntan su imagen cuando la API la incluye. Rone Arena es un proyecto comunitario no oficial; sus datos y disponibilidad dependen del servicio externo.
 
+## Among Chat
+
+Among Chat es un juego social por rondas para grupos. Las salas aceptan de 4 a 10 jugadores; una partida asigna 1 impostor hasta 6 jugadores y 2 impostores desde 7. Los roles se entregan por mensaje privado: tripulante, impostor, detective, médico e ingeniero.
+
+En el grupo:
+
+- `!amongus crear`, `!amongus unir` y `!amongus iniciar`: crear sala, unirse e iniciar (solo quien creó la sala puede iniciarla).
+- `!amongus estado` y `!amongus cancelar`: consultar la sala o cancelar el lobby.
+- `!amongus reunion` y `!amongus votacion`: abrir una discusión y luego una votación.
+- `!amongus resolver`: el anfitrión cierra una votación si alguien no votó.
+- `!reparar <respuesta>`: resolver en el grupo el desafío de un sabotaje.
+- `!amongus perfil`, `!amongus ranking` y `!amongus temporada`: consultar estadísticas y clasificaciones.
+- `!amongus tienda`, `!amongus comprar <ID>` y `!amongus equipar <ID>`: comprar cosméticos trimestrales con las monedas ganadas.
+
+Por privado al bot:
+
+- `!tarea` y luego `!tarea <respuesta>`: recibir y resolver tareas de cálculo, descifrado César, buscar el emoji distinto o una simulación de envío de correo (no envía emails reales); cada tripulante puede completar hasta tres.
+- `!matar <número>`: acción del impostor.
+- `!sabotear luces|reactor|oxigeno`: iniciar un desafío de reparación con límite de 60 segundos.
+- `!proteger <número>` (Médico), `!investigar <número>` (Detective) y `!votar <número>`; el número corresponde a la lista de jugadores anunciada en el grupo. Usa `!votar 0` para abstenerte.
+
+La tripulación gana al expulsar a todos los impostores o completar las tareas; los impostores ganan cuando igualan a los tripulantes vivos o vence el sabotaje. Los impostores comparten una acción por ronda. Después de una eliminación hay una ventana de 60 segundos para completar tareas antes de que empiece automáticamente la discusión; una reunión de emergencia puede iniciarla antes. Los jugadores ganan XP, niveles, monedas y logros; hay ranking global y de temporada, además de cosméticos trimestrales que se pueden comprar y equipar. Las salas activas viven en memoria y terminan si se reinicia el bot. Las estadísticas, monedas y cosméticos se guardan en MongoDB si está disponible. Por defecto se intenta `mongodb://localhost:27017/swordbot`; puedes cambiarlo con `MONGODB_URI` en `.env`. Si MongoDB no está disponible, la partida continúa y las estadísticas quedan solo en memoria hasta reiniciar el proceso.
+
 ## Comandos
 
 Envía `!help` en WhatsApp para ver el menú actualizado de comandos y juegos. Los comandos grupales que necesitan leer miembros del grupo solo funcionan en grupos.
@@ -70,7 +93,7 @@ Las pruebas usan dobles locales para WhatsApp y los servicios externos: no enví
 
 - `index.js`: punto de entrada; carga la configuración y arranca el bot.
 - `config/`: carga de variables de entorno y construcción del cliente de WhatsApp.
-- `commands/`: comandos disponibles para los usuarios.
+- `commands/`: comandos agrupados por funcionalidad. `rone-api/` reúne las consultas de Rone API, `among-chat/` los comandos del juego social, `ahorcado/` el juego de ahorcado y `adivinanza/` los comandos de adivinanzas; los demás comandos generales quedan directamente en esta carpeta.
 - `events/`: registro explícito de eventos y manejadores del cliente.
 - `services/`: integraciones HTTP externas.
 - `utils/`: registro de comandos, formato de mensajes, filtros y lógica de juegos.

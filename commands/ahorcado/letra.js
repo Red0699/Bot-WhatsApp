@@ -1,6 +1,6 @@
 // commands/letra.js
 
-const { adivinarLetra, estadoJuego, finalizarJuego } = require('../utils/ahorcadoManager');
+const { adivinarLetra, estadoJuego, finalizarJuego } = require('../../utils/ahorcadoManager');
 
 module.exports = {
   name: '!letra',

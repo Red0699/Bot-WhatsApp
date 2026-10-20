@@ -7,6 +7,18 @@ const test = require('node:test');
 
 const commandsPath = path.join(__dirname, '..', 'commands');
 
+function getCommandFiles(directory = commandsPath) {
+  return fs.readdirSync(directory, { withFileTypes: true })
+    .flatMap(entry => {
+      const entryPath = path.join(directory, entry.name);
+      if (entry.isDirectory()) return getCommandFiles(entryPath);
+      return entry.isFile() && entry.name.endsWith('.js')
+        ? [path.relative(commandsPath, entryPath).split(path.sep).join('/')]
+        : [];
+    })
+    .sort();
+}
+
 test('la corrección de whatsapp-web.js elimina el ID privado de medios y es idempotente', () => {
   const { patchMediaMessageId } = require('../scripts/patch-whatsapp-web-media-id');
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'whatsapp-media-id-'));
@@ -365,26 +377,28 @@ test('el registro de eventos declara explícitamente los eventos del cliente', (
 });
 
 test('todos los comandos disponibles cargan y responden', async (t) => {
-  const commandFiles = fs.readdirSync(commandsPath)
-    .filter(file => file.endsWith('.js'))
-    .sort();
+  const commandFiles = getCommandFiles();
   const expectedCommands = [
-    'adivinanza.js', 'ahorcado.js', 'audio.js', 'chiste.js', 'composicion.js', 'gemini.js',
-    'grupo.js', 'help.js', 'heroe.js', 'hola.js', 'jugada.js', 'letra.js',
-    'mlbuild.js', 'mlcompat.js', 'mlcounters.js', 'mlitems.js', 'mlrank.js', 'mlstats.js',
-    'mltendencias.js', 'pista.js', 'ppt.js', 'presentate.js', 'rendirse.js',
-    'respuestaAdivinanza.js', 'tagall.js'
+    'adivinanza/adivinanza.js', 'adivinanza/pista.js', 'adivinanza/rendirse.js',
+    'adivinanza/respuestaAdivinanza.js', 'ahorcado/ahorcado.js', 'ahorcado/letra.js',
+    'among-chat/amongus.js', 'among-chat/investigar.js', 'among-chat/matar.js',
+    'among-chat/proteger.js', 'among-chat/reparar.js', 'among-chat/sabotear.js',
+    'among-chat/tarea.js', 'among-chat/votar.js', 'audio.js', 'chiste.js', 'composicion.js',
+    'gemini.js', 'grupo.js', 'help.js', 'hola.js', 'jugada.js', 'ppt.js', 'presentate.js',
+    'rone-api/heroe.js', 'rone-api/mlbuild.js', 'rone-api/mlcompat.js',
+    'rone-api/mlcounters.js', 'rone-api/mlitems.js', 'rone-api/mlrank.js',
+    'rone-api/mlstats.js', 'rone-api/mltendencias.js', 'tagall.js'
   ].sort();
 
   assert.deepEqual(commandFiles, expectedCommands);
 
   await t.test('!adivinanza', async () => {
-    const result = await runCommand('adivinanza.js');
+    const result = await runCommand('adivinanza/adivinanza.js');
     assert.match(result.replies[0], /¡Adivinanza!/);
   });
 
   await t.test('!ahorcado', async () => {
-    const result = await runCommand('ahorcado.js');
+    const result = await runCommand('ahorcado/ahorcado.js');
     assert.match(result.replies[0], /Nuevo juego de Ahorcado/);
   });
 
@@ -482,6 +496,7 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
     const result = await runCommand('help.js');
     assert.match(result.replies[0], /!ppt/);
     assert.match(result.replies[0], /!presentate/);
+    assert.match(result.replies[0], /!amongus/);
   });
 
   await t.test('!heroe', async () => {
@@ -509,7 +524,7 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
           }
         })
       }, async () => {
-        const result = await runCommand('heroe.js', { body: '!heroe Pharsa' });
+        const result = await runCommand('rone-api/heroe.js', { body: '!heroe Pharsa' });
         assert.equal(result.sent.length, 1);
         assert.equal(result.sent[0][1].mimetype, 'image/png');
         assert.equal(result.sent[0][1].data, Buffer.from('image-data').toString('base64'));
@@ -535,7 +550,7 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
         }]
       })
     }, async () => {
-      const result = await runCommand('mlrank.js', { body: '!mlrank mythic' });
+      const result = await runCommand('rone-api/mlrank.js', { body: '!mlrank mythic' });
       assert.match(result.replies[0], /Pharsa/);
       assert.match(result.replies[0], /60\.00%/);
     });
@@ -562,10 +577,10 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
       }),
       getHeroNamesById: async () => new Map([['10', 'Franco']])
     }, async () => {
-      const counterResult = await runCommand('mlcounters.js', { body: '!mlcounters Pharsa' });
+      const counterResult = await runCommand('rone-api/mlcounters.js', { body: '!mlcounters Pharsa' });
       assert.match(counterResult.replies[0], /Franco/);
 
-      const compatibilityResult = await runCommand('mlcompat.js', { body: '!mlcompat Pharsa' });
+      const compatibilityResult = await runCommand('rone-api/mlcompat.js', { body: '!mlcompat Pharsa' });
       assert.match(compatibilityResult.replies[0], /Franco/);
     });
   });
@@ -577,7 +592,7 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
         { equipname: 'Warrior Boots', equipid: 2 }
       ]
     }, async () => {
-      const result = await runCommand('mlitems.js', { body: '!mlitems magic' });
+      const result = await runCommand('rone-api/mlitems.js', { body: '!mlitems magic' });
       assert.match(result.replies[0], /Magic Shoes/);
       assert.doesNotMatch(result.replies[0], /Warrior Boots/);
     });
@@ -604,7 +619,7 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
       ],
       getHero: async () => null
     }, async () => {
-      const result = await runCommand('mlbuild.js', { body: '!mlbuild Pharsa mid' });
+      const result = await runCommand('rone-api/mlbuild.js', { body: '!mlbuild Pharsa mid' });
       assert.match(result.replies[0], /Magic Shoes → Holy Crystal/);
       assert.match(result.replies[0], /Mid Lane/);
     });
@@ -630,10 +645,10 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
         data: { hero: { data: { name: 'Pharsa' } } }
       })
     }, async () => {
-      const stats = await runCommand('mlstats.js', { body: '!mlstats Pharsa mythic' });
+      const stats = await runCommand('rone-api/mlstats.js', { body: '!mlstats Pharsa mythic' });
       assert.match(stats.replies[0], /51\.00%/);
 
-      const trends = await runCommand('mltendencias.js', { body: '!mltendencias Pharsa' });
+      const trends = await runCommand('rone-api/mltendencias.js', { body: '!mltendencias Pharsa' });
       assert.match(trends.replies[0], /52\.00%/);
     });
   });
@@ -669,7 +684,7 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
     const { iniciarJuego } = require('../utils/ahorcadoManager');
     const chatId = 'game-letra@g.us';
     iniciarJuego(chatId);
-    const result = await runCommand('letra.js', {
+    const result = await runCommand('ahorcado/letra.js', {
       body: '!letra 1',
       from: chatId
     });
@@ -679,7 +694,7 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
   await t.test('!pista', async () => {
     const { iniciarAdivinanza } = require('../utils/adivinanzaManager');
     iniciarAdivinanza('game-pista@g.us');
-    const result = await runCommand('pista.js', {
+    const result = await runCommand('adivinanza/pista.js', {
       from: 'game-pista@g.us'
     });
     assert.ok(result.replies.length > 0);
@@ -707,7 +722,7 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
     const { iniciarAdivinanza } = require('../utils/adivinanzaManager');
     const chatId = 'game-rendirse@g.us';
     iniciarAdivinanza(chatId);
-    const result = await runCommand('rendirse.js', { from: chatId });
+    const result = await runCommand('adivinanza/rendirse.js', { from: chatId });
     assert.match(result.replies[0], /Te rendiste/);
   });
 
@@ -716,7 +731,7 @@ test('todos los comandos disponibles cargan y responden', async (t) => {
       juegoActivo: () => true,
       verificarRespuesta: () => true
     }, async () => {
-      const result = await runCommand('respuestaAdivinanza.js', {
+      const result = await runCommand('adivinanza/respuestaAdivinanza.js', {
         body: '!respuesta respuesta',
         from: 'game-respuesta@g.us'
       });

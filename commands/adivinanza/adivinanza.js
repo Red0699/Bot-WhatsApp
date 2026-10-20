@@ -1,4 +1,4 @@
-const { iniciarAdivinanza } = require('../utils/adivinanzaManager');
+const { iniciarAdivinanza } = require('../../utils/adivinanzaManager');
 
 module.exports = {
   name: '!adivinanza',
